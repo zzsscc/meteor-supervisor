@@ -1,0 +1,186 @@
+<template name="topNavbar">
+    <div class="row border-bottom">
+        <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <!--左边-->
+            <div class="navbar-header">
+                <a id="navbar-minimalize" class="minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+                <h2 style="float:left;margin-top: 22px;">天信监理项目监管系统软件</h2>
+            </div>
+            <!--右边-->
+            <ul class="nav navbar-top-links navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle count-info">
+                        <img src="img/make.png" class="personSet" data-toggle="modal" data-target="#myModalSetting" />
+                        <!--<i class="fa fa-envelope"></i>-->
+                        <!--<span class="label label-warning">16</span>-->
+                    </a>
+                </li>
+                <!--消息-->
+                <li class="dropdown" style="position: relative;">
+                    <a class="dropdown-toggle count-info messages" data-toggle="modal" data-target="#myModalMessages">
+                        <img src="img/message.png" />
+                        <div class="sm-ball">{{newMessageNum}}</div>
+                        <!--<i class="fa fa-bell"></i>-->
+                        <!--<span class="label label-primary">8</span>-->
+                    </a>
+                </li>
+
+                <!--登出-->
+                <li>
+                    <a href="/login" class="tologout">
+                        <img src="img/logout.png" /> <span style="vertical-align: middle;">退出登录</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <!--消息模态框-->
+    <div class="modal inmodal" id="myModalMessages" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close closeMessage" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <div class="modal-title">事件通知</div>
+                </div>
+                <div class="modal-body">
+                    <div class="row ProjectWrap pull-left">
+                        <div class="row noFMR">
+                            <div class="row ProjectWrap-top">
+                                <i class="fa fa-comment"></i>
+                            </div>
+                            {{#each messageProject}}
+                                <div class="row projectList">
+                                    {{proname}}
+                                </div>
+                            {{/each}}
+                        </div>
+                    </div>
+                    <div class="row messageWrap pull-right" id="messageWrap">
+                        <div class="row noFMR">
+                            {{#if ifMessageMore}}
+                            <div class="row noFMR messageMore">
+                                查看更多消息
+                            </div>
+                            {{/if}}
+                            {{#if Template.subscriptionsReady}}
+                            {{#each messageList}}
+                                {{#if messageLOR senderId}}
+                                    <div class="row messageList messageListRight">
+                                        <div class="pull-right messageContent">
+                                            <div class="messageContent-bubble-right">
+                                                <div class="messageFrom">{{sendSup}}-{{senderName}}</div>
+                                                <div class="messageFrom2">{{createAt}}</div>
+                                                <div class="bubble-right"></div>
+                                                <img src="{{avatar}}" alt="" class="img-circle img-circle-sm">
+                                                <p class="messageText">{{content}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {{else}}
+                                    <div class="row messageList messageListLeft">
+                                        <div class="pull-left messageContent">
+                                            <div class="messageContent-bubble-left">
+                                                <div class="messageFrom">{{sendSup}}-{{senderName}}</div>
+                                                <div class="messageFrom2">{{createAt}}</div>
+                                                <div class="bubble-left"></div>
+                                                <img src="{{avatar}}" alt="" class="img-circle img-circle-sm">
+                                                <p class="messageText">{{content}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {{/if}}
+                            {{/each}}
+                            {{/if}}
+                            <!--<div class="row messageList messageListLeft">-->
+                                <!--<div class="pull-left messageContent">-->
+                                    <!--<div class="messageContent-bubble-left">-->
+                                        <!--<div class="messageFrom">111-999</div>-->
+                                        <!--<div class="bubble-left"></div>-->
+                                        <!--<img src="img/a1.jpg" alt="" class="img-circle img-circle-sm">-->
+                                        <!--<span class="messageText">11111111111111</span>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="row messageList messageListRight">-->
+                                <!--<div class="pull-right messageContent">-->
+                                    <!--<div class="messageContent-bubble-right">-->
+                                        <!--<div class="messageFrom">222-单据号</div>-->
+                                        <!--<div class="bubble-right"></div>-->
+                                        <!--<img src="img/a2.jpg" alt="" class="img-circle img-circle-sm">-->
+                                        <!--<span class="messageText">222</span>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        </div>
+                    </div>
+                    <div class="row messageSend pull-right">
+                        <div class="messageSendEmpty">
+                            消息不能为空！
+                            <div class="arrow"></div>
+                        </div>
+                        <!--<input type="text" class="form-control m-b sendMessageText pull-left" disabled="{{messageDisable}}">-->
+                        <textarea class="form-control m-b sendMessageText pull-left" disabled="{{messageDisable}}" style="resize: none;height: 35px"></textarea>
+                        <div class="pull-right tosendMessage">
+                            <img src="img/message-send.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--个人设置模态框-->
+    <div class="modal inmodal" id="myModalSetting" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close closeSefSet" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <div class="modal-title">个人设置</div>
+                </div>
+                <div class="modal-body modal-body-pad">
+                    {{#each selfSetting}}
+                    <div class="row noFMR headpicSet">
+                        <label class="col-sm-4 control-label" style="padding-top: 18px">个人头像 :</label>
+                        <div class="col-sm-8">
+                            <input id="uploadHead" type="file" style="display:none">
+                            <img alt="image" class="img-circle headpic" src="{{avatar}}"/>
+                        </div>
+                    </div>
+                    <div class="row noFMR phoneSet">
+                        <label class="col-sm-4 control-label" style="padding-top: 7px"><p class="notnull">*</p>手机设置 :</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control m-b phone" value="{{phone}}">
+                            <span class="help-block m-b-none phoneNone" style="color:red;top:2px;right: -40px;">不能为空</span>
+                        </div>
+                    </div>
+                    {{/each}}
+                    <div class="row noFMR passwordSet">
+                        <label class="col-sm-4 control-label" style="padding-top: 7px">密码设置 :</label>
+                        <div class="col-sm-8">
+                            <input type="password" class="form-control m-b oldpassword" placeholder="原密码">
+                            <input type="password" class="form-control m-b newpassword" placeholder="新密码">
+                            <input type="password" class="form-control m-b renewpassword" placeholder="确认新密码">
+                        </div>
+                    </div>
+                    <div class="row passwordNot" style="display: none;margin: auto;color: red;text-align: center;margin-bottom: 10px;"></div>
+                    <div class="row serverRes" style="display: none;margin: auto;color: red;text-align: center;margin-bottom: 10px;"></div>
+                    {{#each selfSetting}}
+                    <div class="row noFMR certificateSet">
+                        <label class="col-sm-4 control-label" style="padding-top: 15px">监理证书 :</label>
+                        <div class="col-sm-8">
+                            <input id="certificate" type="file" style="display:none">
+                            <img alt="image" style="height: 80px" src="{{certificate}}" Onclick="certificate.click();certificatepath.value=certificate.value;"/>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success tosetting">确定</button>
+                    <button type="button" class="btn" data-dismiss="modal" style="background-color: #b3b3b3;color:#fff">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

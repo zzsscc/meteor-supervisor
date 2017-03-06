@@ -1,0 +1,9 @@
+{
+    "kadira":{
+        "appId": "vZJNqKMsbCbHKhRdc", 
+        "appSecret": "8f469c9c-dbf7-448e-aa8e-0f43178c82e4",
+        "debug":{
+           "authKey":"sa"
+        }
+     }
+}

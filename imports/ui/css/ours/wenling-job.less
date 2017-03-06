@@ -1,0 +1,195 @@
+.inspector-ul li{
+    min-width: 80px;
+    height: 30px;
+    padding:0 8px;
+    float: left;
+    text-align: center;
+    line-height: 30px;
+    border:1px solid #e6e6e6;
+    cursor: pointer;
+}
+.inspector-ul .active{
+    background-color: #11a3ee;
+    color:#fff;
+    border:1px solid #11a3ee;
+}
+.photoShow{
+    height: 135px;
+    padding:10px;
+    overflow-x:scroll;
+    overflow-y:hidden
+}
+.photoShow>img{
+    width: 100px;
+    height: 100px;
+    border:7px solid #cccccc;
+    /*float:left;*/
+    margin-left:29px;
+}
+//970px以下
+@media screen and (max-width: 1150px) {
+    .trail-list{
+        position: absolute;
+        top: 10%;
+        right: 20px;
+        width: 250px;
+        height: 480px;
+        background: #fff;
+        border: 1px solid #e3e1de;
+    }
+
+    .trail-list .trail-title{
+        box-sizing: content-box;
+        padding-left: 15px;
+        height: 40px;
+        background: #11a3ee;
+        color: #fff;
+        font-size: 16px;
+        line-height: 40px;
+    }
+
+    .trail-list .trail-ul{
+        box-sizing: border-box;
+        padding: 20px;
+        height: 440px;
+        width: 100%;
+        overflow-y: scroll;
+    }
+
+    .trail-list .trail-ul .trail-li{
+        padding: 6px;
+        padding-left: 60px;
+        width: 200px;
+        height: 50px;
+        border: 1px solid #dadada;
+        background: url(img/monitor-hui.png) 10px 50% no-repeat;
+        color: #666666;
+        margin-bottom: 15px;
+        cursor: pointer;
+    }
+
+    .trail-list .trail-ul .trail-li.active{
+        border: 1px solid #11a3ee;
+        background: url(img/monitor.png) 10px 50% no-repeat;
+        color: #11a3ee;
+    }
+
+    .trail-list .trail-ul .trail-li .trail-p1,.trail-list .trail-ul .trail-li .trail-p2{
+        margin: 0 !important;
+        overflow:hidden;
+        white-space:nowrap;
+        text-overflow:ellipsis;
+    }
+}
+//970px--1400px
+@media screen and (max-width: 1400px) and (min-width:970px){
+    .trail-list{
+        position: absolute;
+        top: 10%;
+        right: 100px;
+        width: 250px;
+        height: 480px;
+        background: #fff;
+        border: 1px solid #e3e1de;
+    }
+
+    .trail-list .trail-title{
+        box-sizing: content-box;
+        padding-left: 15px;
+        height: 40px;
+        background: #11a3ee;
+        color: #fff;
+        font-size: 16px;
+        line-height: 40px;
+    }
+
+    .trail-list .trail-ul{
+        box-sizing: border-box;
+        padding: 20px;
+        height: 440px;
+        width: 100%;
+        overflow-y: scroll;
+    }
+
+    .trail-list .trail-ul .trail-li{
+        padding: 6px;
+        padding-left: 60px;
+        width: 200px;
+        height: 50px;
+        border: 1px solid #dadada;
+        background: url(img/monitor-hui.png) 10px 50% no-repeat;
+        color: #666666;
+        margin-bottom: 15px;
+        cursor: pointer;
+    }
+
+    .trail-list .trail-ul .trail-li.active{
+        border: 1px solid #11a3ee;
+        background: url(img/monitor.png) 10px 50% no-repeat;
+        color: #11a3ee;
+    }
+
+    .trail-list .trail-ul .trail-li .trail-p1,.trail-list .trail-ul .trail-li .trail-p2{
+        margin: 0 !important;
+        overflow:hidden;
+        white-space:nowrap;
+        text-overflow:ellipsis;
+    }
+}
+
+
+//1400px以上
+@media screen and (min-width: 1400px) {
+    .trail-list{
+        position: absolute;
+        top: 10%;
+        right: 100px;
+        width: 300px;
+        height: 480px;
+        background: #fff;
+        border: 1px solid #e3e1de;
+    }
+
+    .trail-list .trail-title{
+        box-sizing: content-box;
+        padding-left: 15px;
+        height: 40px;
+        background: #11a3ee;
+        color: #fff;
+        font-size: 16px;
+        line-height: 40px;
+    }
+
+    .trail-list .trail-ul{
+        box-sizing: border-box;
+        padding: 20px;
+        height: 440px;
+        width: 100%;
+        overflow-y: scroll;
+    }
+
+    .trail-list .trail-ul .trail-li{
+        padding: 6px;
+        padding-left: 60px;
+        width: 250px;
+        height: 50px;
+        border: 1px solid #dadada;
+        background: url(img/monitor-hui.png) 10px 50% no-repeat;
+        color: #666666;
+        margin-bottom: 15px;
+        cursor: pointer;
+    }
+
+    .trail-list .trail-ul .trail-li.active{
+        border: 1px solid #11a3ee;
+        background: url(img/monitor.png) 10px 50% no-repeat;
+        color: #11a3ee;
+    }
+
+    .trail-list .trail-ul .trail-li .trail-p1,.trail-list .trail-ul .trail-li .trail-p2{
+        margin: 0 !important;
+        overflow:hidden;
+        white-space:nowrap;
+        text-overflow:ellipsis;
+    }
+}

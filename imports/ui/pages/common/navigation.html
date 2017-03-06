@@ -1,0 +1,55 @@
+<template name="navigation">
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse">
+
+            <!-- Close canvas menu used only on OffCanvas page -->
+            <!-- You can remove this tag if you dont use offCanvas menu -->
+            <a class="close-canvas-menu"><i class="fa fa-times"></i></a>
+            <!-- End offCanvas menu toggle -->
+
+            <ul class="nav metismenu" id="side-menu">
+                {{#each navigationUser}}
+                    <li class="nav-header">
+                        <div class="dropdown profile-element">
+                            <span>
+                                <img style="vertical-align:top;height: 69px;width: 69px" alt="image" class="img-circle" src="{{avatar}}" />
+                            </span>
+                            <div style="display: inline-block;margin-left: 5px;margin-top: 10px" data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                <div class="clear">
+                                    <span class="m-t-xs">
+                                        <span style="font-size: 18px;color:#fff">{{username}}</span>
+                                    </span>
+                                    <span class="text-muted text-xs block" style="font-size: 16px;color:#fff">{{type}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="logo-element">
+                            IN+
+                        </div>
+                    </li>
+                {{/each}}
+                <li class="cockpit-choose {{isActivePath regex='/cockpit'}}">
+                    <a href="/cockpit"><img src="img/cockpit-choosed.png" style="margin-right: 15px"/> <span class="nav-label" data-i18n="nav.cockpit">驾驶舱</span> </a>
+                </li>
+                <!--判断用户类型是否显示，只有admin显示-->
+                {{#if navigationSorH}}
+                    <li class="project-choose {{isActivePath regex='/project'}}">
+                        <a href="/project"><img src="img/project-choosed.png" style="margin-right: 15px"/> <span class="nav-label" data-i18n="nav.project">项目管理</span> </a>
+                    </li>
+                    <li class="user-choose {{isActivePath regex='/userManagement'}}">
+                        <a href="/userManagement"><img src="img/user-choosed.png" style="margin-right: 15px"/> <span class="nav-label" data-i18n="nav.userManagement">用户管理</span> </a>
+                    </li>
+                    <li class="owner-choose {{isActivePath regex='/ownerManagement'}}">
+                        <a href="/ownerManagement"><img src="img/yezhu-choosed.png" style="margin-right: 15px"/> <span class="nav-label" data-i18n="nav.ownerManagement">业主管理</span> </a>
+                    </li>
+                {{/if}}
+                <!--{{#each navigationPro}}-->
+                    <!--<li class="{{isActivePath regex='/projectOverview'}}">-->
+                        <!--<a href="/projectOverview"><i class="fa fa-diamond"></i> <span class="nav-label" data-i18n="nav.projectOverview">{{proname}}</span> </a>-->
+                    <!--</li>-->
+                <!--{{/each}}-->
+            </ul>
+
+        </div>
+    </nav>
+</template>

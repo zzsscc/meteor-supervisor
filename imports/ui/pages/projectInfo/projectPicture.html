@@ -1,0 +1,192 @@
+<template name="projectPicture">
+    {{> subNavigation}}
+    <div class="row border-bottom white-bg dashboard-header">
+        <!--点位信息导入-->
+        <div class="clear-fix" style="padding-bottom: 10px;border-bottom: 1px solid #e6e6e6;">
+            <div class="pull-left" style="height: 30px;line-height: 30px;margin-right:35px;font-size:16px;">点位类型 ：</div>
+            <div class="btn-group">
+                {{#each proType}}
+                    <button class="btn btn-white chosetype" type="button">{{type}}</button>
+                {{/each}}
+            </div>
+        </div>
+        <div style="padding-top:15px;">
+            <div class="p-t-title clear-fix" style="margin-bottom: -40px;">
+                <h3 class="pull-left">点位信息</h3>
+            </div>
+            <div class="row" style="margin-bottom: 20px">
+                <div class="col-sm-3 f-frt tosearchinput">
+                    <div class="input-group"><input type="text" placeholder="请输入点位编号或设备名称" class="searchPoint input-sm form-control"> <span class="input-group-btn toSearchPoint">
+                                        <button type="button" class="btn btn-sm btn-success"> <i class="fa fa-search"></i></button> </span></div>
+                </div>
+            </div>
+            <table class="table table-hover col-xs-12">
+                <thead class="table-thead-font">
+                <tr>
+                    <th>序号</th>
+                    <th>编号</th>
+                    <!--<th class="tosort">编号 <i class="fa fa-caret-down"></i></th>-->
+                    <th>设备名称</th>
+                    <th>所属区域</th>
+                    <th>图片数量</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody class="table-tbody-font">
+                {{#if Template.subscriptionsReady}}
+                {{#each pointTable}}
+                    <tr class="getPoint">
+                        <td class="col-lg-1">{{ordinal}}</td>
+                        <td>{{code}}</td>
+                        <td>{{name}}</td>
+                        <td>{{region}}</td>
+                        <td class="col-lg-1">{{nowpicsum}} / {{picsum}}</td>
+                        <td class="col-lg-3">
+                            <button class="btn btn-success toEditBz" type="button" data-toggle="modal" data-target="#myModalBzPoint">备注</button>
+                        </td>
+                    </tr>
+                {{/each}}
+                {{/if}}
+                </tbody>
+            </table>
+            <div class="M-box1" style="float: right"></div>
+        </div>
+    </div>
+
+    <div class="row border-bottom white-bg dashboard-header" style="margin-top: 10px;">
+        <!--方向-->
+        <div class="clear-fix" style="padding-bottom: 10px;">
+            <div class="pull-left" style="height: 30px;line-height: 30px;margin-right:35px;font-size:14px;">方向：</div>
+            <div class="btn-group">
+                <button class="btn btn-success choseeqm choseeqmall" type="button">全部</button>
+                {{#if Template.subscriptionsReady}}
+                {{#each equipment}}
+                    <button class="btn btn-white choseeqm choseeqmone" type="button">{{name}}</button>
+                {{/each}}
+                {{/if}}
+            </div>
+        </div>
+        <!--照片类型-->
+        <div class="clear-fix" style="padding-bottom: 10px;">
+            <div class="pull-left" style="height: 30px;line-height: 30px;margin-right:35px;font-size:14px;">照片类型 ：</div>
+            <div class="btn-group">
+                <button class="btn btn-success choseimgclass choseimgclassall" type="button">全部</button>
+                {{#if Template.subscriptionsReady}}
+                {{#each imageclassify}}
+                    <button class="btn btn-white choseimgclass choseimgclassone" type="button">{{name}}</button>
+                {{/each}}
+                {{/if}}
+            </div>
+        </div>
+        <!--具体信息-->
+        <div class="clear-fix" style="padding-bottom: 10px;">
+            <div class="pull-left" style="height: 30px;line-height: 30px;margin-right:35px;font-size:14px;">具体信息 ：</div>
+            <div class="btn-group">
+                <button class="btn btn-success chosedetail chosedetailall" type="button">全部</button>
+                {{#if Template.subscriptionsReady}}
+                {{#each imageDetail}}
+                    <button class="btn btn-white chosedetail chosedetailone" type="button">{{name}}</button>
+                {{/each}}
+                {{/if}}
+            </div>
+        </div>
+        <div class="clear-fix" style="padding-bottom: 10px;border-bottom: 1px solid #e6e6e6">
+            <div class="pull-left" style="height: 30px;line-height: 30px;margin-right:35px;font-size:14px;">验收前后 ：</div>
+            <div class="btn-group">
+                <button class="btn btn-success choseacc choseaccall" type="button">全部</button>
+                <button class="btn btn-white choseacc choseaccbefore" type="button">验收前</button>
+                <button class="btn btn-white choseacc choseaccafter" type="button">验收后</button>
+            </div>
+        </div>
+        <!--照片-->
+        <div class="projectPics clear-fix">
+            {{#if Template.subscriptionsReady}}
+            {{#each imageinfo}}
+                <div>
+                    <div id="links" class="pics pull-left" style="position: relative">
+                        <!--<img class="jl-img" src="{{base64}}" alt="{{imgRemark}}">-->
+                        <a href="{{base64}}" title="{{takeTime}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{pointName}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{byusername}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{imgRemark}}" data-gallery="" data-description="This is a banana."><img class="jl-img" src="{{base64}}"></a>
+                        <button class="btn btn-default btn-circle toremovePic" type="button" data-toggle="modal" data-target="#myModalRemovePic"><i class="fa fa-minus"></i></button>
+                        <div style="position: absolute;bottom: -48px;text-align: center">{{createtime}}</div>
+                    </div>
+                </div>
+            {{/each}}
+            {{/if}}
+        </div>
+    </div>
+
+    <!--<div id="links">-->
+        <!--<a href="img/gallery/1.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/1s.jpg"></a>-->
+        <!--<a href="img/gallery/2.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/2s.jpg"></a>-->
+        <!--<a href="img/gallery/3.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/3s.jpg"></a>-->
+        <!--<a href="img/gallery/4.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/4s.jpg"></a>-->
+        <!--<a href="img/gallery/5.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/5s.jpg"></a>-->
+        <!--<a href="img/gallery/6.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/6s.jpg"></a>-->
+        <!--<a href="img/gallery/7.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/7s.jpg"></a>-->
+        <!--<a href="img/gallery/8.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/8s.jpg"></a>-->
+        <!--<a href="img/gallery/9.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/9s.jpg"></a>-->
+        <!--<a href="img/gallery/10.jpg" title="Image from Unsplash" data-gallery=""><img src="img/gallery/10s.jpg"></a>-->
+
+    <!--</div>-->
+    <!-- The Gallery as lightbox dialog, should be a child element of the document body -->
+    <div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls">
+        <div class="slides"></div>
+        <h3 class="title"></h3>
+        <a class="prev">‹</a>
+        <a class="next">›</a>
+        <a class="close">×</a>
+        <a class="play-pause"></a>
+        <ol class="indicator"></ol>
+    </div>
+
+
+
+
+
+
+
+
+    <!--修改点位备注模态框-->
+    <div class="modal inmodal fade" id="myModalBzPoint" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <div class="modal-title">备注信息</div>
+                </div>
+                <div class="modal-body modal-body-pad">
+                    <div class="form-group" style="height: 100px;">
+                        <label class="col-lg-4 control-label" style="padding-top: 8px">点位备注<span> :</span></label>
+                        <div class="col-lg-8">
+                            {{#each editorPoint}}
+                                <textarea class="form-control editPointRemark" style="height:100px;resize: none;" value="{{pointRemark}}"></textarea>
+                            {{/each}}
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success editBz" data-dismiss="modal">确认修改</button>
+                    <button type="button" class="btn" data-dismiss="modal" style="background-color: #b3b3b3;color:#fff">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--删除照片模态框-->
+    <div class="modal inmodal fade" id="myModalRemovePic" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <div class="modal-title">删除确认框</div>
+                </div>
+                <div class="modal-body">
+                    <p>你确定删除当前选中的照片吗？</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success removePic" data-dismiss="modal">确认</button>
+                    <button type="button" class="btn" data-dismiss="modal" style="background-color: #b3b3b3;color:#fff">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

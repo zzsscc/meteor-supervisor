@@ -1,0 +1,44 @@
+<template name="user_table">
+    <tr>
+        <td>{{ordinal}}</td>
+        <td>{{username}}</td>
+        <td>{{entrydate}}</td>
+        <!--职位-->
+        <td>{{job}}</td>
+        {{#if showBtn type}}
+            <td>{{phone}}</td>
+        {{else}}
+            <td>
+                /
+            </td>
+        {{/if}}
+        <!--职称-->
+        <!--<td>{{supTitle}}</td>-->
+        <td>{{typeZC}}</td>
+
+        <!--项目数-->
+        <!--{{#if whichEng type}}-->
+            <!--<td>{{JLGprocount}}</td>-->
+        <!--{{else}}-->
+            <!--<td>{{ZGprocount}}</td>-->
+        <!--{{/if}}-->
+        <td>{{proNum}}</td>
+
+        {{#if showBtn type}}
+            <td>
+                {{#if ableState state}}
+                    <button class="btn btn-gray able">停用</button>
+                {{else}}
+                    <button class="btn btn-success able">启用</button>
+                {{/if}}
+                <button class="btn btn-success editor" type="button" data-toggle="modal" data-target="#myModalEditorUser">编辑</button>
+                <button class="btn btn-success editpwd" type="button" data-toggle="modal" data-target="#myModalEditorPasd">密码修改</button>
+                <button class="btn btn-success del" type="button" data-toggle="modal" data-target="#myModalDelUser">删除</button>
+            </td>
+        {{else}}
+            <td>
+                &nbsp;
+            </td>
+        {{/if}}
+    </tr>
+</template>

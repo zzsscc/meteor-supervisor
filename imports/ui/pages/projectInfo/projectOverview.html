@@ -1,0 +1,163 @@
+<template name="projectOverview">
+    {{> subNavigation}}
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>人员配备：</h5>
+                </div>
+                <div class="ibox-content clear-fix" style="font-size:14px;padding-bottom: 20px">
+                    {{#if Template.subscriptionsReady}}
+                        {{#each proPeople}}
+                            <div class="col-lg-4 col-md-12">
+                                <img class="img-circle" src="{{avatar}}" style="width: 100px;height: 100px">
+                            </div>
+                            <ul class="col-lg-7  col-md-12">
+                                <li style="margin-bottom: 20px;">
+                                    <span>监理工程师 : </span>
+                                    <span>{{proLeader}}</span>
+                                </li>
+                                <li style="margin-bottom: 20px;">
+                                    <span>公司职位 : </span>
+                                    <span>{{proJob}}</span>
+                                </li>
+                                <li style="margin-bottom: 20px;">
+                                    <span>人员数量 :</span>
+                                    <span>{{pronum}}人</span>
+                                </li>
+                                <li style="margin-bottom: 20px;">
+                                    <span>联系方式 :</span>
+                                    <span>{{proTel}} </span>
+                                </li>
+                            </ul>
+                            <div id="links" class="col-lg-12">
+                                <a href="{{certificate}}" data-gallery=""><img src="{{certificate}}" style="height: 170px;margin: auto;display:block"></a>
+                            </div>
+                        {{/each}}
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>项目概况 : </h5>
+                    <button class="workchart" style="display: none"></button>
+                </div>
+                <div class="ibox-content clear-fix" style="font-size:14px;height: 367px;padding-bottom: 20px">
+                    <div id="work-chart" style="width:100%;height:100%;"></div>
+                </div>
+            </div>
+        </div>
+        <!--<div class="col-lg-4">-->
+            <!--<div class="ibox float-e-margins">-->
+                <!--<div class="ibox-title">-->
+                    <!--<h5>项目概况 : </h5>-->
+                <!--</div>-->
+                <!--<div class="ibox-content clear-fix" style="font-size:14px;height: 367px">-->
+                        <!--{{#if Template.subscriptionsReady}}-->
+						<!--{{#each proPeople}}-->
+                        <!--<div class="lgg-center">项目名称 ：{{proname}}</div>-->
+                        <!--<div style=" margin-bottom: 20px;margin-left:25%;">包含 ：</div>-->
+                        <!--<ul>-->
+                        	<!--{{#each proType}}-->
+	                            <!--<li style="margin-bottom: 20px;" class="clear-fix">-->
+	                                <!--<div class="pull-left" style="width:200px;text-align:right">{{type}} : </div>-->
+	                                <!--<div class="pull-left">{{proTypNumber}}个</div>-->
+	                            <!--</li>-->
+                            <!--{{/each}}-->
+                        <!--</ul>-->
+                        <!--{{/each}}-->
+                        <!--{{/if}}-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <div class="col-lg-4">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>监理概况 : </h5>
+                    <button class="jianlichart" style="display: none"></button>
+                </div>
+                <div class="ibox-content clear-fix" style="font-size:14px;height: 367px;padding-bottom: 20px">
+                    <div id="jianli-chart" style="width:100%;height:100%;"></div>
+                </div>
+            </div>
+        </div>
+        <!--<div class="col-lg-4">-->
+            <!--<div class="ibox float-e-margins">-->
+                <!--<div class="ibox-title">-->
+                    <!--<h5>监理概况 : </h5>-->
+                <!--</div>-->
+                <!--<div class="ibox-content clear-fix" style="font-size:14px;height: 367px;">-->
+                    <!--{{#if Template.subscriptionsReady}}-->
+                	<!--{{#each proPeople}}-->
+                        <!--<div class="lgg-center">监理照片总数 ：{{picSum}}张</div>-->
+                        <!--<div style=" margin-bottom: 20px;margin-left:25%;">包含 ：</div>-->
+                        <!--<ul>-->
+                        	<!--{{#each proType}}-->
+	                            <!--<li style="margin-bottom: 20px;" class="clear-fix">-->
+	                                <!--<div class="pull-left" style="width:200px; text-align: right">{{type}} : </div>-->
+	                                <!--<div class="pull-left">{{picNumber}}个</div>-->
+	                            <!--</li>-->
+                            <!--{{/each}}-->
+
+                        <!--</ul>-->
+                    <!--{{/each}}-->
+                    <!--{{/if}}-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    </div>
+    <div class="row white-bg" style="padding:10px">
+
+        <ul class="inspector-ul">
+            <li class="supervision active" data="all">全部</li>
+            {{#if Template.subscriptionsReady}}
+            {{#each superVision}}
+            <li class="supervision" data={{superVision_id}}>{{visionName}}</li>
+            {{/each}}
+            {{/if}}
+        </ul>
+    </div>
+    <div class="row white-bg">
+            {{#if Template.subscriptionsReady}}
+    		{{#each proPeople}}
+            <h2 style="text-align: center;margin-bottom: 20px;font-size:16px;color:#333;font-family:'微软雅黑';font-weight:900">{{proname}}监理工作走势图</h2>
+             {{/each}}
+            {{/if}}
+            <div class="clear-fix">
+                <ul class="inspector-ul pull-right" style="margin-right: 20%">
+                    <li class="imgdata active" data="7">7天</li>
+                    <li class="imgdata" data="15">15天</li>
+                    <li class="imgdata" data="30">1个月</li>
+                </ul>
+            </div>
+        <!--工作走势图-->
+        <div id='work-trends-map' class="col-xs-12" style="height:380px; background-color:#fff;">
+        	<div class="row">
+        		<div class="col-lg-12">
+	                <div class="ibox float-e-margins">
+				        	<div class="col-lg-12">
+				        		<div  style="height: 350px;">
+				        			<div id="pic-chart" style="width:100%;height:100%;"></div>
+				        		</div>
+				        	</div>
+	                </div>
+	            </div>
+        	</div>
+        </div>
+    </div>
+
+
+
+
+    <div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls">
+        <div class="slides"></div>
+        <h3 class="title"></h3>
+        <a class="prev">‹</a>
+        <a class="next">›</a>
+        <a class="close">×</a>
+        <a class="play-pause"></a>
+        <ol class="indicator"></ol>
+    </div>
+</template>

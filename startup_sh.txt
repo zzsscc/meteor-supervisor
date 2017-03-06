@@ -1,0 +1,11 @@
+export ROOT_URL=http://127.0.0.1
+export PORT=4000
+export NODE_ENV=production
+export MONGO_URL=mongodb://127.0.0.1:27017/jianli
+export KADIRA_PROFILE_LOCALLY=1
+
+echo $METEOR_SETTINGS
+
+nohup meteor --allow-superuser --port 4000 --settings settings.json &
+
+

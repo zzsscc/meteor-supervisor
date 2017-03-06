@@ -1,0 +1,42 @@
+<!--照片类型-->
+<template name="pictureType">
+    <div class="row border-bottom white-bg dashboard-header" style="margin-top: 10px;">
+    	<!--方向-->
+        <div class="clear-fix" style="padding-bottom: 10px;">
+            <div class="pull-left" style="height: 30px;line-height: 30px;margin-right:35px;font-size:14px;">设备方向：</div>
+            <ul class="inspector-ul">
+                <li class="active">方向1</li>
+                <li>方向2</li>
+                <li>方向3</li>
+                <li>方向4</li>
+            </ul>
+        </div>
+        <!--照片类型-->
+        <div class="clear-fix" style="padding-bottom: 10px;">
+            <div class="pull-left" style="height: 30px;line-height: 30px;margin-right:35px;font-size:14px;">照片类型 ：</div>
+            <ul class="inspector-ul">
+                <li class="active">全部</li>
+                <li>工程环境</li>
+                <li>工程设备</li>
+            </ul>
+        </div>
+        <!--具体信息-->
+        <div class="clear-fix" style="padding-bottom: 10px;">
+            <div class="pull-left" style="height: 30px;line-height: 30px;margin-right:35px;font-size:14px;">具体信息 ：</div>
+            <ul class="inspector-ul">
+                <li>全部</li>
+                <li class="active">基础</li>
+                <li>杆件</li>
+                <li>管路</li>
+            </ul>
+        </div>
+        <div class="clear-fix" style="padding-bottom: 10px;border-bottom: 1px solid #e6e6e6">
+            <div class="pull-left" style="height: 30px;line-height: 30px;margin-right:35px;font-size:14px;">验收前后 ：</div>
+            <ul class="inspector-ul">
+                <li>验收前</li>
+                <li class="active">验收后</li>
+            </ul>
+        </div>
+        {{> Picture_show}}
+    </div>
+</template>

@@ -1,0 +1,110 @@
+
+// Variables, Mixins
+@import '../imports/ui/css/globals/variables.import.less';
+@import '../imports/ui/css/globals/mixins.import.less';
+
+// INSPINIA Theme Elements
+@import '../imports/ui/css/globals/typography.import.less';
+@import '../imports/ui/css/globals/navigation.import.less';
+@import '../imports/ui/css/globals/top_navigation.import.less';
+@import '../imports/ui/css/globals/buttons.import.less';
+@import '../imports/ui/css/globals/badgets_labels.import.less';
+@import '../imports/ui/css/globals/elements.import.less';
+@import '../imports/ui/css/globals/sidebar.import.less';
+@import '../imports/ui/css/globals/base.import.less';
+@import '../imports/ui/css/globals/pages.import.less';
+@import '../imports/ui/css/globals/chat.import.less';
+@import '../imports/ui/css/globals/metismenu.import.less';
+@import '../imports/ui/css/globals/spinners.import.less';
+
+// Landing page
+@import '../imports/ui/css/globals/landing.import.less';
+
+// RTL Support
+@import '../imports/ui/css/globals/rtl.import.less';
+
+// For demo only - config box style
+@import '../imports/ui/css/globals/theme-config.import.less';
+
+// INSPINIA Skins
+@import '../imports/ui/css/globals/skins.import.less';
+@import '../imports/ui/css/globals/md-skin.import.less';
+
+// Media query style
+@import '../imports/ui/css/globals/media.import.less';
+
+// Custom style
+// Your custom style to override base style
+@import '../imports/ui/css/globals/custom.import.less';
+
+
+
+// animate 
+@import '../imports/ui/css/animate/animate.less';
+
+
+//ours
+@import '../imports/ui/css/ours/cockpit.less';
+@import '../imports/ui/css/ours/login.less';
+@import '../imports/ui/css/ours/navbar-position.less';
+@import '../imports/ui/css/ours/project.less';
+@import '../imports/ui/css/ours/sub-nav.less';
+@import '../imports/ui/css/ours/wenling-basic.less';
+@import '../imports/ui/css/ours/wenling-basic-map.less';
+@import '../imports/ui/css/ours/wenling-job.less';
+@import '../imports/ui/css/ours/wenling-pro.less';
+@import '../imports/ui/css/ours/project-Pic.less';
+@import '../imports/ui/css/ours/custom.less';
+@import '../imports/ui/css/ours/top-navbar.less';
+@import '../imports/ui/css/ours/loading.less';
+@import '../imports/ui/css/ours/blueimp-gallery.min.less';
+@import '../imports/ui/css/ours/blueimp-gallery-indicator.less';
+@import '../imports/ui/css/ours/datepicker3.less';
+@import '../imports/ui/css/ours/pagination.less';
+
+
+
+
+
+
+// Clear layout on print mode
+@media print {
+  nav.navbar-static-side {
+    display: none;
+  }
+
+  body { overflow: visible !important; }
+
+  #page-wrapper {
+    margin: 0;
+  }
+}
+
+//lgg自定义样式 全局通用样式
+ul,li{
+  margin: 0;
+  padding: 0;
+}
+li{
+  list-style: none;
+}
+.clear-fix:after{
+  content: '';
+  display: block;
+  clear: both;
+}
+.f-flt{
+  float: left;
+}
+.f-frt{
+  float: right;
+}
+
+
+
+
+
+
+
+
+

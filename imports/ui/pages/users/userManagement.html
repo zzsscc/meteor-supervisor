@@ -1,0 +1,241 @@
+<template name="userManagement">
+    <div class="row border-bottom" id="navbarPositon">
+        <div class="navbar-position"><span>当前位置 :</span><span style="color:#11a3ee"> 用户管理</span></div>
+    </div>
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>用户管理</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-sm-3 f-frt tosearchinput">
+                                <div class="input-group"><input type="text" placeholder="请输入用户名" class="searchUser input-sm form-control"> <span class="toSearchUser input-group-btn">
+                                        <button type="button" class="btn btn-sm btn-success"> <i class="fa fa-search"></i></button> </span></div>
+                            </div>
+                        </div>
+                        <table class="table table-hover">
+                            <thead class="table-thead-font">
+                                <tr>
+                                    <th>序号</th>
+                                    <th>用户名</th>
+                                    <th>入职日期</th>
+                                    <th>公司职位</th>
+                                    <th>联系方式/账号</th>
+                                    <th>监理职称</th>
+                                    <th>项目数量</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-tbody-font">
+                                {{#if Template.subscriptionsReady}}
+                                {{#each ut in userTable}}
+                                    {{> user_table (ut)}}
+                                {{/each}}
+                                {{/if}}
+                            </tbody>
+                            <tfoot>
+                            <th colspan="8">
+                                <button class="btn btn-outline btn-success dim m-t addUser" type="button"  data-toggle="modal" data-target="#myModalAddUser">
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                            </th>
+                            </tfoot>
+                        </table>
+                        <div class="M-box1" style="float: right"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--修改密码模态框-->
+    <div class="modal inmodal" id="myModalEditorPasd" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <div class="modal-title">密码修改</div>
+                </div>
+                <div class="modal-body modal-body-pad">
+                    {{#each userEditorTable}}
+                        <p style="text-align: center;font-size: 14px;margin-bottom: 25px;">你确定修改用户{{username}}的密码吗？</p>
+                    {{/each}}
+                    <div class="form-group" style="height: 30px;">
+                        <label class="col-sm-12 control-label" style="padding-top: 7px">初始化密码为 ： 8888888</label>
+                    </div>
+                    <div class="form-group" style="height: 30px;">
+                        <label class="col-sm-4 control-label" style="padding-top: 7px">修改密码为 ：</label>
+                        <div class="col-sm-8">
+                            <input type="text" placeholder="不填为初始密码" class="password">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success editorpasd" data-dismiss="modal">确定</button>
+                    <button type="button" class="btn" data-dismiss="modal" style="background-color: #b3b3b3;color:#fff">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--删除模态框-->
+    <div class="modal inmodal" id="myModalDelUser" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <div class="modal-title">删除确认框</div>
+                </div>
+                <div class="modal-body">
+                    {{#each userEditorTable}}
+                        <p style="text-align: center;font-size: 14px;">你确定删除{{username}}相关的用户信息吗？</p>
+                    {{/each}}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success deluser" data-dismiss="modal">确定</button>
+                    <button type="button" class="btn" data-dismiss="modal" style="background-color: #b3b3b3;color:#fff">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--编辑模态框-->
+    <div class="modal inmodal" id="myModalEditorUser" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <div class="modal-title">用户编辑</div>
+                </div>
+                <div class="modal-body modal-body-pad">
+                    {{#each userEditorTable}}
+                        <div class="row">
+                            <label class="col-sm-4 control-label" style="padding-top: 7px"><p class="notnull">*</p>用户名 :</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control m-b userName" value="{{username}}">
+                                <span class="help-block m-b-none userNameNone" style="color:red;top:2px;right: -40px;">不能为空</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-4 control-label" style="padding-top: 7px"><p class="notnull">*</p>入职时间 :</label>
+                            <div class="col-sm-8">
+                                <!--<input type="text" class="form-control m-b entryDate" value="{{entrydate}}">-->
+                                <!--<span class="help-block m-b-none entryDateNone" style="color:red;top:2px;right: -40px;">不能为空</span>-->
+                                <div class="form-group">
+                                    <div class="input-group date" id="data_2">
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control entryDate" value="{{entrydate}}"/>
+                                    </div>
+                                    <span class="help-block m-b-none entryDateNone" style="top:4px;right: -40px;">不能为空</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-4 control-label" style="padding-top: 7px"><p class="notnull">*</p>公司职位 :</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control m-b job" value="{{job}}">
+                                <span class="help-block m-b-none jobNone" style="color:red;top:2px;right: -40px;">不能为空</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-4 control-label" style="padding-top: 7px"><p class="notnull">*</p>联系方式/账号 :</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control m-b phone" value="{{phone}}">
+                                <span class="help-block m-b-none phoneNone" style="color:red;top:2px;right: -40px;">不能为空</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-4 control-label" style="padding-top: 7px"><p class="notnull">*</p>监理职称 :</label>
+                            <div class="col-sm-8">
+                                <select class="form-control m-b supTitle" name="supTitle">
+                                    {{#each userType}}
+                                        {{#if selectdUT value}}
+                                            <option selected="selected">{{name}}</option>
+                                        {{else}}
+                                            <option>{{name}}</option>
+                                        {{/if}}
+                                    {{/each}}
+                                </select>
+                            </div>
+                        </div>
+                        <!--<div class="form-group" style="height: 30px;">-->
+                            <!--<label class="col-lg-4 control-label" style="padding-top: 7px">项目数量 :</label>-->
+                            <!--<div class="col-lg-8 m-b">-->
+                                <!--<p class="form-control-static">{{proNum}}</p>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    {{/each}}
+                    <div class="row serverRes" style="display: none;margin: auto;color: red;text-align: center;margin-bottom: 10px;"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success editoruser">确定</button>
+                    <button type="button" class="btn" data-dismiss="modal" style="background-color: #b3b3b3;color:#fff">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--添加用户模态框-->
+    <div class="modal inmodal" id="myModalAddUser" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <div class="modal-title">新增用户</div>
+                </div>
+                <div class="modal-body modal-body-pad">
+                        <div class="form-group" style="height: 30px;">
+                            <label class="col-sm-4 control-label" style="padding-top: 7px"><p class="notnull">*</p>用户名 :</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control m-b userName">
+                                <span class="help-block m-b-none userNameNone" style="color:red;top:2px;right: -40px;">不能为空</span>
+                            </div>
+                        </div>
+                        <div class="form-group" style="height: 30px;">
+                            <label class="col-sm-4 control-label" style="padding-top: 7px"><p class="notnull">*</p>入职时间 :</label>
+                            <div class="col-sm-8">
+                                <!--<input type="text" class="form-control m-b entryDate">-->
+                                <!--<span class="help-block m-b-none entryDateNone" style="color:red;top:2px;right: -40px;">不能为空</span>-->
+                                <div class="form-group">
+                                    <div class="input-group date" id="data_1">
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control entryDate" />
+                                    </div>
+                                    <span class="help-block m-b-none entryDateNone" style="top:4px;right: -40px;">不能为空</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group" style="height: 30px;">
+                            <label class="col-sm-4 control-label" style="padding-top: 7px"><p class="notnull">*</p>公司职位 :</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control m-b job">
+                                <span class="help-block m-b-none jobNone" style="color:red;top:2px;right: -40px;">不能为空</span>
+                            </div>
+                        </div>
+                        <div class="form-group" style="height: 30px;">
+                            <label class="col-sm-4 control-label" style="padding-top: 7px"><p class="notnull">*</p>联系方式/账号 :</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control m-b phone">
+                                <span class="help-block m-b-none phoneNone" style="color:red;top:2px;right: -40px;">不能为空</span>
+                            </div>
+                        </div>
+                        <div class="form-group" style="height: 30px;">
+                            <label class="col-sm-4 control-label" style="padding-top: 7px"><p class="notnull">*</p>监理职称 :</label>
+                            <div class="col-sm-8">
+                                <select class="form-control m-b supTitle" name="supTitle">
+                                    <!--<option>总监理工程师</option>-->
+                                    <!--<option>监理工程师</option>-->
+                                    <!--<option>监理员</option>-->
+                                    {{#each userType}}
+                                        <option>{{name}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row serverRes" style="display: none;margin: auto;color: red;text-align: center;margin-bottom: 10px;"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success adduser">确定</button>
+                    <button type="button" class="btn" data-dismiss="modal" style="background-color: #b3b3b3;color:#fff">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

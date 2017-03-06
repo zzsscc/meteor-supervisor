@@ -1,0 +1,652 @@
+<!--基础设置-->
+<template name="projectBasic">
+    {{> subNavigation}}
+    <!--{{> picMain}}-->
+    <div class="row border-bottom white-bg dashboard-header">
+        <!--点位信息导入-->
+        <div class="clear-fix" style="padding-bottom: 10px;border-bottom: 1px solid #e6e6e6;">
+            <div class="pull-left" style="height: 30px;line-height: 30px;margin-right:35px;font-size:16px;">点位类型 ：</div>
+            <div class="btn-group">
+                {{#each proType}}
+                    <button class="btn btn-white chosetype" type="button">{{type}}</button>
+                {{/each}}
+                <!--<button class="btn btn-success" type="button">电子警察</button>-->
+                <!--<button class="btn btn-white" type="button">卡口</button>-->
+                <!--<button class="btn btn-white" type="button">动态监控</button>-->
+                <!--<button class="btn btn-white" type="button">机房</button>-->
+            </div>
+            <!--<ul class="inspector-ul">-->
+                <!--{{#each proType}}-->
+                    <!--<li>{{type}}</li>-->
+                <!--{{/each}}-->
+            <!--</ul>-->
+        </div>
+        <div style="padding-top:15px;">
+            <div class="p-t-title clear-fix" style="margin-bottom: -40px;">
+                <h3 class="pull-left">点位信息</h3>
+            </div>
+            <div class="row" style="margin-bottom: 20px">
+                <div class="col-sm-3 f-frt tosearchinput">
+                    <div class="input-group"><input type="text" placeholder="请输入点位编号或设备名称" class="searchPoint input-sm form-control"> <span class="input-group-btn toSearchPoint">
+                                        <button type="button" class="btn btn-sm btn-success"> <i class="fa fa-search"></i></button> </span></div>
+                </div>
+            </div>
+            <table class="table table-hover col-xs-12">
+                <thead class="table-thead-font">
+                    <tr>
+                        <th>序号</th>
+                        <th class="tosort">编号
+                            <i class="fa fa-caret-down" data="code"></i>
+                        </th>
+                        <th>设备名称</th>
+                        <th>纬度</th>
+                        <th>经度</th>
+                        <th class="tosort">所属区域
+                            <i class="fa fa-caret-down" data="region"></i>
+                        </th>
+                        <th>所需图片张数</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody class="table-tbody-font">
+                    {{#if Template.subscriptionsReady}}
+                    {{#each pointTable}}
+                        <!--{{> picTable}}-->
+                        <tr class="getPoint">
+                            <td class="col-lg-1">{{ordinal}}</td>
+                            <td>{{code}}</td>
+                            <td>{{name}}</td>
+                            <td>{{latitude}}</td>
+                            <td>{{longitude}}</td>
+                            <td>{{region}}</td>
+                            <td class="col-lg-1">{{picsum}}</td>
+                            <td class="col-lg-3">
+                                {{#if ifToChange}}
+                                    <button class="btn btn-success toEditPoint" type="button" data-toggle="modal" data-target="#myModalEditPoint">编辑</button>
+                                {{/if}}
+                                <!--<button class="btn btn-success toEditPoint" type="button" data-toggle="modal" data-target="#myModalEditPoint">编辑</button>-->
+                                <button class="btn btn-success toEditBz" type="button" data-toggle="modal" data-target="#myModalBzPoint">备注</button>
+                                {{#if ifToChange}}
+                                    <button class="btn btn-success toRemovePoint" type="button" data-toggle="modal" data-target="#myModalRemovePoint">删除</button>
+                                {{/if}}
+                                <!--<button class="btn btn-success toRemovePoint" type="button" data-toggle="modal" data-target="#myModalRemovePoint">删除</button>-->
+                            </td>
+                        </tr>
+                    {{/each}}
+                    {{/if}}
+                </tbody>
+                {{#if ifToChange}}
+                <tfoot>
+                <th colspan="8">
+                    <button class="btn btn-outline btn-success dim m-t toaddpoint" type="button"  data-toggle="modal" data-target="#myModalAddPoint">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                </th>
+                </tfoot>
+                {{/if}}
+            </table>
+            <div class="M-box1" style="float: right"></div>
+        </div>
+    </div>
+    <div class="row border-bottom white-bg dashboard-header" style="margin-bottom: 15px">
+    	<div class="btn-group">
+            {{#if Template.subscriptionsReady}}
+            {{#each equipment}}
+                <button class="btn btn-white choseEquipment" type="button">{{name}}</button>
+            {{/each}}
+            {{/if}}
+        </div>
+        {{#if ifToChange}}
+            <button class="btn btn-success pull-right dataExport" style="margin-right: 50px">数据导出</button>
+            <button class="btn btn-success pull-right" style="margin-right: 50px" data-toggle="modal" data-target="#excelImport">数据导入</button>
+            <a class="btn btn-success pull-right" style="margin-right: 50px" href="template/template.xlsx" target="_blank">模板下载</a>
+        {{/if}}
+    </div>
+    <div class="row">
+        <!--监理员选择-->
+        <div class="col-lg-2">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>监理员选择</h5>
+                </div>
+                <div class="ibox-content clear-fix">
+                    <ul class="scrollYY">
+                        <!--{{#if Template.subscriptionsReady}}-->
+                        {{#each selectJLY}}
+                            <li class="clear-fix pro-e-li">
+                                <div class="i-checks" style="margin:auto">
+                                    <label style="margin-bottom: 15px">
+                                    {{#if ifToChange}}
+                                        {{#if JLYchecked _id}}
+                                            <input style="margin-top: -1px" class="checkboxJLY icheckbox_square-green" type="checkbox" checked />
+                                            <span style="font-size: 14px">{{username}}</span>
+                                        {{else}}
+                                            <input style="margin-top: -1px" class="checkboxJLY icheckbox_square-green" type="checkbox" />
+                                            <span style="font-size: 14px">{{username}}</span>
+                                        {{/if}}
+                                    {{else}}
+                                        {{#if JLYchecked _id}}
+                                            <input style="margin-top: -1px" class="checkboxJLY icheckbox_square-green" type="checkbox" checked disabled/>
+                                            <span style="font-size: 14px">{{username}}</span>
+                                        {{else}}
+                                            <input style="margin-top: -1px" class="checkboxJLY icheckbox_square-green" type="checkbox" disabled/>
+                                            <span style="font-size: 14px">{{username}}</span>
+                                        {{/if}}
+                                    {{/if}}
+                                    </label>
+                                </div>
+                            </li>
+                        {{/each}}
+                        <!--{{/if}}-->
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--照片分类-->
+        <div class="col-lg-5">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>照片分类</h5>
+                </div>
+                <div class="ibox-content clear-fix" style="font-size:14px;">
+                    <table class="table table-hover col-xs-12">
+                        <thead class="table-thead-font">
+                            <tr>
+                                <th>序号</th>
+                                <th>照片类型</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-tbody-font">
+                            {{#if Template.subscriptionsReady}}
+                            {{#each imageclassify}}
+                                <tr class="getImgClass">
+                                    <td>{{ordinal}}</td>
+                                    <td>{{name}}</td>
+                                    {{#if ifToChange}}
+                                        <td>
+                                            <button class="btn btn-success toeditimgclass" data-toggle="modal" data-target="#myModalEditImgClass">编辑</button>
+                                            <button class="btn btn-success toremoveimgclass" data-toggle="modal" data-target="#myModalDelImgClass">删除</button>
+                                        </td>
+                                    {{else}}
+                                        <td>/</td>
+                                    {{/if}}
+                                </tr>
+                            {{/each}}
+                            {{/if}}
+                        </tbody>
+                        {{#if ifToChange}}
+                        <tfoot>
+                            <th colspan="3">
+                                <button class="btn btn-outline btn-success dim m-t toaddimgclass" type="button"  data-toggle="modal" data-target="#myModalAddImgClass">
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                            </th>
+                        </tfoot>
+                        {{/if}}
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!--具体信息-->
+        <div class="col-lg-5">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>具体信息</h5>
+                </div>
+                <div class="ibox-content clear-fix" style="font-size:14px;">
+                    <table class="table table-hover col-xs-12">
+                        <thead class="table-thead-font">
+                            <tr>
+                                <th>序号</th>
+                                <th>项目名称</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-tbody-font">
+                            {{#if Template.subscriptionsReady}}
+                            {{#each imageDetail}}
+                                <tr class="getImgDetail">
+                                    <td>{{ordinal}}</td>
+                                    <td>{{name}}</td>
+                                    {{#if ifToChange}}
+                                    <td>
+                                        <button class="btn btn-success toeditimgdetail" data-toggle="modal" data-target="#myModalEditImgDetail">编辑</button>
+                                        <button class="btn btn-success toremoveimgdetail" data-toggle="modal" data-target="#myModalDelImgDetail">删除</button>
+                                    </td>
+                                    {{else}}
+                                        <td>/</td>
+                                    {{/if}}
+                                </tr>
+                            {{/each}}
+                            {{/if}}
+                        </tbody>
+                        {{#if ifToChange}}
+                        <tfoot>
+                            <th colspan="3">
+                                <button class="btn btn-outline btn-success dim m-t toaddimgdetail" type="button"  data-toggle="modal" data-target="#myModalAddImgDetail">
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                            </th>
+                        </tfoot>
+                        {{/if}}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mapWarp">
+        <div class="mapClose"></div>
+        <div class="mapTitle">单击选择点位，双击确认</div>
+        <div class="nowChoosePoint">{{nowChoosePoint}}</div>
+        <div class="nowChooseGeoc">{{nowChooseGeoc}}</div>
+        <div id="map" style="width:100%;height:100%;"></div>
+    </div>
+
+
+
+
+    <!--地图模态框-->
+    <!--<div class="modal inmodal" id="myModalMap" tabindex="3" role="dialog"  aria-hidden="true">-->
+        <!--<div class="modal-dialog modal-lg">-->
+            <!--<div class="modal-content">-->
+                <!--<div class="modal-header">-->
+                    <!--<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>-->
+                    <!--<div class="modal-title">经纬度选择</div>-->
+                <!--</div>-->
+                <!--<div class="modal-body">-->
+                    <!--<div style="width:90%;height:700px">-->
+                        <!--<div id="map" style="width:100%;height:100%;"></div>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="modal-footer">-->
+                    <!--<button type="button" class="btn btn-success" data-dismiss="modal">确定</button>-->
+                    <!--<button type="button" class="btn" data-dismiss="modal" style="background-color: #b3b3b3;color:#fff">取消</button>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--添加点位模态框-->
+    <div class="modal inmodal" id="myModalAddPoint" tabindex="-1" role="dialog"  aria-hidden="false">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <div class="modal-title">新增点位</div>
+                </div>
+                <div class="modal-body modal-body-pad">
+                    <div class="row serverRes" style="display: none;margin: auto;color: red;text-align: center;margin-bottom: 10px"></div>
+                    <div class="row">
+                        <label class="col-sm-4 control-label" style="padding-top: 7px"><p class="notnull">*</p>编号 :</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control m-b code">
+                            <span class="help-block m-b-none codeNone" style="color:red;top:2px;right: -40px;">不能为空</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-4 control-label" style="padding-top: 7px"><p class="notnull">*</p>设备名称 :</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control m-b loadName">
+                            <span class="help-block m-b-none loadNameNone" style="color:red;top:2px;right: -40px;">不能为空</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-4 control-label" style="padding-top: 7px">纬度 :
+                            <!--<i class="gomap fa fa-crosshairs"></i>-->
+                        </label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control m-b latitude">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-4 control-label" style="padding-top: 7px">经度 :</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control m-b longitude">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-4 control-label" style="padding-top: 7px"><p class="notnull">*</p>所属区域 :</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control m-b region">
+                            <span class="help-block m-b-none regionNone" style="color:red;top:2px;right: -40px;">不能为空</span>
+                        </div>
+                    </div>
+                    <!--<div class="row" style="margin-bottom: 20px;">-->
+                        <!--<label class="col-lg-4 control-label" style="height:100px;padding-top: 8px">方向<span> :</span></label>-->
+                        <!--<div class="col-lg-8">-->
+                            <!--<textarea class="form-control equipment" style="height:100px;resize: none;margin-bottom: 30px;" placeholder="多个方向间请换行" required=""></textarea>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <div class="row" style="margin-bottom: 20px">
+                        <label class="col-lg-4 control-label" style="padding-top: 8px">方向<span> :</span></label>
+                        <div class="col-lg-8">
+                            <div class="row addrow" style="margin-right: 0;margin-left: 0">
+                                <input type="text" class="form-control m-b neweqm" placeholder="方向" style="width: 30%;margin-right: 5%;display: inline-block;">
+                                <input type="text" class="form-control m-b newcount" placeholder="照片数" style="width: 30%;margin-right: 5%;display: inline-block;">
+                                <button class="btn btn-success tonewaddeqm" type="button">添加</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="height: 100px;">
+                        <label class="col-lg-4 control-label" style="padding-top: 8px">点位备注<span> :</span></label>
+                        <div class="col-lg-8">
+                            <textarea class="form-control pointRemark" style="height:100px;resize: none;"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success addpoint">确定</button>
+                    <button type="button" class="btn" data-dismiss="modal" style="background-color: #b3b3b3;color:#fff">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--删除点位模态框-->
+    <div class="modal inmodal" id="myModalRemovePoint" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <div class="modal-title">删除确定框</div>
+                </div>
+                <div class="modal-body">
+                    <p>你确定删除当前选中的点位信息吗？</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success delpoint" data-dismiss="modal">确定</button>
+                    <button type="button" class="btn" data-dismiss="modal" style="background-color: #b3b3b3;color:#fff">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--修改点位备注模态框-->
+    <div class="modal inmodal" id="myModalBzPoint" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <div class="modal-title">备注信息</div>
+                </div>
+                <div class="modal-body modal-body-pad">
+                    <div class="form-group" style="height: 100px;">
+                        <label class="col-lg-4 control-label" style="padding-top: 8px">点位备注<span> :</span></label>
+                        <div class="col-lg-8">
+                            {{#each editorPoint}}
+                                <textarea class="form-control editPointRemark" style="height:100px;resize: none;" value="{{pointRemark}}"></textarea>
+                            {{/each}}
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success editBz" data-dismiss="modal">确认修改</button>
+                    <button type="button" class="btn" data-dismiss="modal" style="background-color: #b3b3b3;color:#fff">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--编辑点位模态框-->
+    <div class="modal inmodal" id="myModalEditPoint" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <div class="modal-title">编辑点位</div>
+                </div>
+                <div class="modal-body modal-body-pad">
+                    {{#each editorPoint}}
+                        <div class="row serverRes" style="display: none;margin: auto;color: red;text-align: center;margin-bottom: 10px"></div>
+                        <div class="row">
+                            <label class="col-sm-4 control-label" style="padding-top: 7px"><p class="notnull">*</p>编号 :</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control m-b code" value="{{code}}">
+                                <span class="help-block m-b-none codeNone" style="color:red;top:2px;right: -40px;">不能为空</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-4 control-label" style="padding-top: 7px"><p class="notnull">*</p>设备名称 :</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control m-b loadName" value="{{name}}">
+                                <span class="help-block m-b-none loadNameNone" style="color:red;top:2px;right: -40px;">不能为空</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-4 control-label" style="padding-top: 7px">纬度 :
+                                <!--<i class="gomap gomaptopoint fa fa-crosshairs"></i>-->
+                            </label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control m-b latitude" value="{{latitude}}">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-4 control-label" style="padding-top: 7px">经度 :</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control m-b longitude" value="{{longitude}}">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-4 control-label" style="padding-top: 7px"><p class="notnull">*</p>所属区域 :</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control m-b region" value="{{region}}">
+                                <span class="help-block m-b-none regionNone" style="color:red;top:2px;right: -40px;">不能为空</span>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-bottom: 20px">
+                            <label class="col-lg-4 control-label" style="padding-top: 8px">方向<span> :</span></label>
+                            <div class="col-lg-8">
+                                {{#each editorEqm}}
+                                    <button class="btn btn-white eqmBtn" type="button" style="margin-bottom: 10px;position: relative;width: 100%;text-align: left">
+                                        {{name}}
+                                        <input type="text" class="form-control editpics" style="width: 50px;height: 20px;display: inline-block;text-align: center;float: right" value="{{piccount}}">
+                                        <span style="float:right;font-size: 12px;padding-top: 3px">所需照片数：</span>
+                                        <button class="btn btn-default btn-circle btn-sm toremoveEqm" type="button" style="position: absolute;top:-7px;right: -7px;display: none"><i class="fa fa-minus"></i></button>
+                                    </button>
+                                {{/each}}
+                                <div class="row" style="margin-right: 0;margin-left: 0">
+                                    <input type="text" class="form-control m-b neweqm" placeholder="方向" style="width: 30%;margin-right: 5%;display: inline-block;margin-top: 20px">
+                                    <input type="text" class="form-control m-b newcount" placeholder="照片数" style="width: 30%;margin-right: 5%;display: inline-block;margin-top: 20px">
+                                    <button class="btn btn-success toaddeqm" type="button">添加</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="height: 100px;">
+                            <label class="col-lg-4 control-label" style="padding-top: 8px">点位备注<span> :</span></label>
+                            <div class="col-lg-8">
+                                <textarea class="form-control pointRemark" style="height:100px;resize: none;" value="{{pointRemark}}"></textarea>
+                            </div>
+                        </div>
+                    {{/each}}
+                    </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success editpoint">确定</button>
+                    <button type="button" class="btn" data-dismiss="modal" style="background-color: #b3b3b3;color:#fff">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--添加照片分类模态框-->
+    <div class="modal inmodal" id="myModalAddImgClass" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <div class="modal-title">添加照片分类</div>
+                </div>
+                <div class="modal-body modal-body-pad">
+                    <div class="form-group" style="height: 30px;">
+                        <label class="col-sm-4 control-label" style="padding-top: 7px"><p class="notnull">*</p>照片分类 :</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control m-b newImgClass">
+                            <span class="help-block m-b-none newImgClassNone" style="color:red;top:2px;right: -40px;">不能为空</span>
+                            <!--<select class="form-control m-b type" name="type">-->
+                            <!--<option>电子警察</option>-->
+                            <!--<option>卡口</option>-->
+                            <!--<option>监控</option>-->
+                            <!--<option>机房</option>-->
+                            <!--</select>-->
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success addImgClass">确定</button>
+                    <button type="button" class="btn" data-dismiss="modal" style="background-color: #b3b3b3;color:#fff">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--编辑照片分类模态框-->
+    <div class="modal inmodal" id="myModalEditImgClass" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <div class="modal-title">编辑照片分类</div>
+                </div>
+                <div class="modal-body modal-body-pad">
+                    {{#each editimageClass}}
+                        <div class="form-group" style="height: 30px;">
+                            <label class="col-sm-4 control-label" style="padding-top: 7px"><p class="notnull">*</p>照片类型 :</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control m-b ImgClass" value="{{name}}">
+                                <span class="help-block m-b-none ImgClassNone" style="top:4px;right: -40px;">不能为空</span>
+                            </div>
+                        </div>
+                    {{/each}}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success editImgClass">确定</button>
+                    <button type="button" class="btn" data-dismiss="modal" style="background-color: #b3b3b3;color:#fff">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--删除照片分类模态框-->
+    <div class="modal inmodal" id="myModalDelImgClass" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <div class="modal-title">删除确定框</div>
+                </div>
+                <div class="modal-body">
+                    <p>你确定删除当前选中的照片分类吗？</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success removeImgClass" data-dismiss="modal">确定</button>
+                    <button type="button" class="btn" data-dismiss="modal" style="background-color: #b3b3b3;color:#fff">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--添加照片具体信息模态框-->
+    <div class="modal inmodal" id="myModalAddImgDetail" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <div class="modal-title">添加照片具体信息</div>
+                </div>
+                <div class="modal-body modal-body-pad">
+                    <div class="row serverRes" style="display: none;margin: auto;color: red;text-align: center;margin-bottom: 10px"></div>
+                    <div class="row">
+                        <label class="col-sm-4 control-label" style="padding-top: 7px"><p class="notnull">*</p>照片具体信息 :</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control m-b newImgDetail">
+                            <span class="help-block m-b-none newImgDetailNone" style="color:red;top:2px;right: -40px;">不能为空</span>
+                            <!--<select class="form-control m-b type" name="type">-->
+                            <!--<option>电子警察</option>-->
+                            <!--<option>卡口</option>-->
+                            <!--<option>监控</option>-->
+                            <!--<option>机房</option>-->
+                            <!--</select>-->
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success addImgDetail">确定</button>
+                    <button type="button" class="btn" data-dismiss="modal" style="background-color: #b3b3b3;color:#fff">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--编辑照片具体信息模态框-->
+    <div class="modal inmodal" id="myModalEditImgDetail" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <div class="modal-title">编辑照片具体信息</div>
+                </div>
+                <div class="modal-body modal-body-pad">
+                    {{#each editimageDetail}}
+                    <div class="form-group" style="height: 30px;">
+                        <label class="col-sm-4 control-label" style="padding-top: 7px"><p class="notnull">*</p>具体信息 :</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control m-b ImgDetail" value="{{name}}">
+                            <span class="help-block m-b-none ImgDetailNone" style="top:4px;right: -40px;">不能为空</span>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success editImgDetail">确定</button>
+                    <button type="button" class="btn" data-dismiss="modal" style="background-color: #b3b3b3;color:#fff">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--删除照片具体信息模态框-->
+    <div class="modal inmodal" id="myModalDelImgDetail" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <div class="modal-title">删除确定框</div>
+                </div>
+                <div class="modal-body">
+                    <p>你确定删除当前选中的照片具体信息吗？</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success removeImgDetail" data-dismiss="modal">确定</button>
+                    <button type="button" class="btn" data-dismiss="modal" style="background-color: #b3b3b3;color:#fff">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--上传-->
+    <div class="modal inmodal fade" id="excelImport" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <div class="modal-title">数据导入</div>
+                </div>
+                <div class="modal-body modal-body-pad">
+                    <div class="form-group" style="height: 30px;">
+                        {{#with currentUpload}}
+                            上传 <b>{{file.name}}</b> 中:
+                            <span id="progress">{{progress.get}}%</span>
+                        {{else}}
+                            <input id="fileInput" type="file" />
+                        {{/with}}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success uploadFile">确定</button>
+                    <button type="button" class="btn" data-dismiss="modal" style="background-color: #b3b3b3;color:#fff">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</template>

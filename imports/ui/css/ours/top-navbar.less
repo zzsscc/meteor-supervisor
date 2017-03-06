@@ -1,0 +1,273 @@
+#myModalMessages .modal-content{
+  border-radius: 0;
+}
+
+#myModalMessages .modal-header{
+  background: #11A3EE;
+  color: #fff;
+  border-bottom: none;
+}
+
+#myModalMessages .modal-body{
+  padding:4px 25px 10px 25px;
+  background: #11A3EE;
+}
+
+#myModalMessages .modal-body:after{
+  content:"";
+  display:block;
+  clear:both;
+}
+
+#myModalMessages .close{
+  color: #fff;
+  filter: alpha(opacity=20);
+  opacity: 1;
+}
+
+#myModalMessages .ProjectWrap{
+  background: #fff;
+  border: 1px solid #e3e3e3;
+  border-radius: 8px;
+  width: 30%;
+  height: 500px;
+  padding-top: 2%;
+}
+
+#myModalMessages .messageWrap{
+  background: #E9F6FE;
+  border: 1px solid #e3e3e3;
+  border-radius: 8px 0 0 0;
+  width: 72%;
+  height: 430px;
+  padding: 3% 2% 2% 2%;
+  overflow-y: scroll;
+}
+
+#myModalMessages .noFMR,#myModalMessages .projectList,#myModalMessages .messageList{
+  margin-right: 0;
+  margin-left: 0;
+}
+
+#myModalMessages .ProjectWrap-top{
+  box-sizing: border-box;
+  padding-left: 15px;
+  padding-bottom: 10px;
+  margin: auto;
+  width: 80%;
+  border-bottom: 2px solid #11A3EE;
+  color: #11A3EE;
+  font-size: 34px;
+  margin-bottom: 20px;
+}
+
+#myModalMessages .projectList{
+  cursor: pointer;
+  border: none;
+  height: 50px;
+  line-height: 50px;
+  font-size: 14px;
+  padding-left: 10%;
+}
+
+#myModalMessages .projectList:hover{
+  background: #e3e3e3;
+}
+#myModalMessages .projectList.active{
+  background: #e3e3e3;
+}
+
+
+
+#myModalMessages .messageMore{
+  color: #11A3EE;
+  margin: auto;
+  font-size: 12px;
+  text-align: center;
+  cursor: pointer;
+}
+#myModalMessages .messageMore:hover{
+  text-decoration:underline;
+}
+
+#myModalMessages .messageListLeft,#myModalMessages .messageListRight{
+  margin-top: 60px;
+  position: relative;
+}
+#myModalMessages .messageListLeft .img-circle-sm,#myModalMessages .messageListRight .img-circle-sm{
+  width: 40px;
+  height: 40px;
+}
+
+#myModalMessages .messageListLeft .img-circle-sm{
+  position: absolute;
+  left: -70px;
+}
+
+#myModalMessages .messageListRight .img-circle-sm{
+  position: absolute;
+  right: -70px;
+}
+
+
+
+.messageContent-bubble-left {
+  box-sizing: content-box;
+  padding-left: 8px;
+  padding-right: 8px;
+  position:relative;
+  margin-left: 80px;
+  background:#fff;
+  //height:40px;
+  color: #666;
+  border-radius:5px; /* 圆角 */
+}
+
+.messageContent-bubble-right {
+  box-sizing: content-box;
+  padding-left: 10px;
+  padding-right: 10px;
+  position:relative;
+  margin-right: 80px;
+  background:#11A3EE;
+  //height:40px;
+  color: #fff;
+  border-radius:5px; /* 圆角 */
+}
+
+.messageContent-bubble-left .messageText,.messageContent-bubble-right .messageText{
+  max-width: 300px;
+  line-height: 35px;
+  word-wrap:break-word;
+}
+
+.messageContent-bubble-left .messageFrom,.messageContent-bubble-right .messageFrom{
+  position: absolute;
+  font-size: 12px;
+  color: #999999;
+  left: 0;
+  top: -40px;
+  word-break:keep-all;
+  white-space:nowrap;
+}
+
+.messageContent-bubble-left .messageFrom2,.messageContent-bubble-right .messageFrom2{
+  position: absolute;
+  font-size: 12px;
+  color: #999999;
+  left: 0;
+  top: -20px;
+  word-break:keep-all;
+  white-space:nowrap;
+}
+
+.messageContent-bubble-left .bubble-left {
+  position:absolute;
+  top:11px;
+  left:-12px;
+  width:0;
+  height:0;
+  font-size:0;
+  border:solid 6px;
+  border-color:transparent #fff transparent transparent;
+}
+
+.messageContent-bubble-right .bubble-right {
+  position:absolute;
+  top:11px;
+  right:-12px;
+  width:0;
+  height:0;
+  font-size:0;
+  border:solid 6px;
+  border-color:transparent transparent transparent #11A3EE;
+}
+
+#myModalMessages .messageSend{
+  position: relative;
+  border-radius: 0 0 8px 8px;
+  height: 70px;
+  width: 72%;
+  background: #fff;
+  box-sizing: border-box;
+  padding: 2%;
+}
+
+#myModalMessages .sendMessageText{
+  width: 90%;
+}
+
+#myModalMessages .tosendMessage{
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background: #11A3EE;
+  cursor: pointer;
+}
+
+#myModalMessages .tosendMessage img{
+  display: inline-block;
+  margin-left: 3px;
+  margin-top: 6px;
+}
+
+.sm-ball{
+  position: absolute;
+  background: red;
+  border-radius: 50%;
+  right: 2px;
+  top: 12px;
+  width: 24px;
+  height: 24px;
+  color: #fff;
+  text-align: center;
+  line-height: 24px;
+  font-size: 14px;
+}
+
+
+
+//个人设置
+#myModalSetting .modal-body>.row:nth-child(1),#myModalSetting .modal-body>.row:nth-child(2){
+  margin-bottom: 30px;
+}
+#myModalSetting .headpicSet img{
+  height: 50px;
+  width: 50px;
+  margin: auto;
+  cursor: pointer;
+}
+#myModalSetting .certificateSet img{
+  height: 50px;
+  margin: auto;
+  cursor: pointer;
+}
+
+
+//消息不能为空提示气泡
+.messageSendEmpty {
+  letter-spacing: 1px;
+  box-sizing: content-box;
+  position:absolute;
+  top:-22px;
+  height:30px;
+  width: 120px;
+  line-height: 30px;
+  text-align: center;
+  color:#333;
+  background:#fff;
+  border:1px solid #999;
+  border-radius:5px; /* 圆角 */
+  display: none;
+}
+
+.messageSendEmpty .arrow {
+  position:absolute;
+  top:30px;
+  left:10px; /* 圆角的位置需要细心调试哦 */
+  width:0;
+  height:0;
+  font-size:0;
+  border:solid 8px;
+  border-color:#999 transparent transparent transparent;
+}

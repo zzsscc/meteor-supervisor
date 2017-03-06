@@ -1,0 +1,466 @@
+<template name="project">
+    <div class="row border-bottom" id="navbarPositon">
+        <div class="navbar-position"><span>当前位置 :</span><span style="color:#11a3ee"> 项目管理</span></div>
+    </div>
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>项目管理</h5>
+                        <!--<button class="btn btn-success weekReport" type="button" >发送周报</button>-->
+                        <!--<button class="btn btn-success monthReport" type="button" >发送月报</button>-->
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-sm-3 f-frt tosearchinput">
+                                <div class="input-group"><input type="text" placeholder="请输入项目名称" class="searchPro input-sm form-control"> <span class="toSearchPro input-group-btn">
+                                        <button type="button" class="btn btn-sm btn-success"> <i class="fa fa-search"></i></button> </span></div>
+                            </div>
+                        </div>
+                        <table class="table table-hover">
+                            <thead class="table-thead-font">
+                                <tr>
+                                    <th>序号</th>
+                                    <th>项目名称</th>
+                                    <th>开始日期</th>
+                                    <th>到期时间</th>
+                                    <th>总监理工程师</th>
+                                    <th>业主联系人电话（登录账号）</th>
+                                    <th>工程进度</th>
+                                    <th>备份方案</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-tbody-font">
+                                <!--{{#if Template.subscriptionsReady}}-->
+                                {{#each ct in projectTable}}
+                                    {{> project_table (ct)}}
+                                {{/each}}
+                                <!--{{/if}}-->
+                            </tbody>
+                            <tfoot>
+                            <th colspan="9">
+                                <button class="btn btn-outline btn-success dim m-t addPro" type="button"  data-toggle="modal" data-target="#myModalAddPro">
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                            </th>
+                            </tfoot>
+                        </table>
+                        <div class="M-box1" style="float: right"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-lg-3 col-md-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>项目类型</h5>
+                    </div>
+                    <div class="ibox-content clear-fix">
+                        <table class="table table-hover col-xs-12">
+                            <thead class="table-thead-font">
+                                <tr>
+                                    <th>序号</th>
+                                    <th>类型</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-tbody-font">
+                                {{#if Template.subscriptionsReady}}
+                                {{#each proType}}
+                                    <tr>
+                                        <td>{{ordinal}}</td>
+                                        <td>{{type}}</td>
+                                        <td>
+                                            <button class="btn btn-success removeProType" data-toggle="modal" data-target="#myModalDelProType">删除</button>
+                                        </td>
+                                    </tr>
+                                {{/each}}
+                                {{/if}}
+                            </tbody>
+                            <tfoot>
+                                <!--{{#if showAddProType}}-->
+                                    <th colspan="3">
+                                        <button class="btn btn-outline btn-success dim m-t toaddProType" type="button"  data-toggle="modal" data-target="#myModalAddType">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </th>
+                                <!--{{/if}}-->
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>项目记录</h5>
+                    </div>
+                    <div class="ibox-content clear-fix">
+                        <table class="table table-hover">
+                            <thead class="table-thead-font">
+                                <tr>
+                                    <th>序号</th>
+                                    <th>备份日期</th>
+                                    <th>备份说明</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-tbody-font">
+                                {{#if Template.subscriptionsReady}}
+                                {{#each proBackup}}
+                                    <tr>
+                                        <td>{{ordinal}}</td>
+                                        <td>{{createTime}}</td>
+                                        <td>备份</td>
+                                        <td>
+                                            <button class="btn btn-success HF" type="button" data-toggle="modal" data-target="#myModalHF">恢复</button>
+                                        </td>
+                                    </tr>
+                                {{/each}}
+                                {{/if}}
+                            </tbody>
+                        </table>
+                        <div class="M-box2" style="float: right"></div>
+                        <!--<button class="btn btn-success pull-right pro-record-next">下一页</button>-->
+                        <!--<button class="btn btn-success pull-right pro-record-previous">上一页</button>-->
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5 col-md-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>项目备注</h5>
+                    </div>
+                    <div class="ibox-content">
+                        {{#each editorTable2}}
+                            <div class="row" style="margin-bottom: 30px;height: 34px">
+                                <label class="col-lg-3 col-md-2 control-label" style="padding-top: 8px">业主联系人<span> :</span></label>
+                                <div class="col-lg-9 col-md-10">
+                                    <input type="text" class="form-control ownername" value="{{ownername}}">
+                                </div>
+                            </div>
+                            <div class="row" style="margin-bottom: 30px;height: 34px">
+                                <label class="col-lg-3 col-md-2 control-label" style="padding-top: 8px">职位<span> :</span></label>
+                                <div class="col-lg-9 col-md-10">
+                                    <input type="text" class="form-control ownerTel" value="{{ownerTel}}">
+                                </div>
+                            </div>
+                            <div class="row" style="margin-bottom: 30px;height: 34px">
+                                <label class="col-lg-3 col-md-2 control-label" style="padding-top: 8px">联系地址<span> :</span></label>
+                                <div class="col-lg-9 col-md-10">
+                                    <input type="text" class="form-control owneraddr" value="{{owneraddr}}">
+                                </div>
+                            </div>
+                            <div class="row" style="margin-bottom: 30px;height: 100px">
+                                <label class="col-lg-3 col-md-2 control-label" style="padding-top: 8px">项目内容<span> :</span></label>
+                                <div class="col-lg-9 col-md-10">
+                                    <textarea class="form-control proRemark" style="height:100px;resize: none;" value="{{proRemark}}"></textarea>
+                                </div>
+                            </div>
+                            <!--保存按钮-->
+                            <div style="height: 30px;margin-bottom: 10px;margin-right: 4%">
+                                <button class="btn btn-success pull-right pro-remark-save" data-toggle="modal" data-target="#myModalBZCG">保存</button>
+                            </div>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--模态框-->
+    <!--删除项目模态框-->
+    <div class="modal inmodal" id="myModalDelPro" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <div class="modal-title">删除确定框</div>
+                </div>
+                <div class="modal-body">
+                    <p>你确定删除当前选中的项目信息吗？</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success delpro" data-dismiss="modal">确定</button>
+                    <button type="button" class="btn" data-dismiss="modal" style="background-color: #b3b3b3;color:#fff">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--编辑项目模态框-->
+    <div class="modal inmodal" id="myModalEditorPro" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <div class="modal-title">项目编辑</div>
+                </div>
+                <div class="modal-body modal-body-pad">
+                    {{#each editorTable}}
+                        <div class="row">
+                            <label class="col-sm-4 control-label" style="padding-top: 7px"><p class="notnull">*</p>项目名称 :</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control m-b proName" value="{{proname}}">
+                                <span class="help-block m-b-none proNameNone" style="color:red;top:2px;right: -40px;">不能为空</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-4 control-label" style="padding-top: 7px"><p class="notnull">*</p>开始日期 :</label>
+                            <div class="col-sm-8">
+                                <!--<input type="text" class="form-control m-b beginDate" value="{{begindate}}">-->
+                                <div class="form-group">
+                                    <div class="input-group date" id="data_2">
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control beginDate" value="{{begindate}}"/>
+                                    </div>
+                                    <span class="help-block m-b-none beginDateNone" style="top:4px;right: -40px;">不能为空</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-4 control-label" style="padding-top: 7px"><p class="notnull">*</p>到期时间 :</label>
+                            <div class="col-sm-8">
+                                <!--<input type="text" class="form-control m-b beginDate" value="{{begindate}}">-->
+                                <div class="form-group">
+                                    <div class="input-group date" id="data_4">
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control endDate" value="{{enddate}}"/>
+                                    </div>
+                                    <span class="help-block m-b-none endDateNone" style="top:4px;right: -40px;">不能为空</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-4 control-label" style="padding-top: 7px">总监理工程师 :</label>
+                            <div class="col-sm-8">
+                                <select class="form-control m-b enger" name="enger">
+                                    <option>请选择</option>
+                                    {{#each userTableZG}}
+                                        <!--<option>{{username}}</option>-->
+                                        {{#if engSelect username}}
+                                            <option selected="selected">{{username}}</option>
+                                        {{else}}
+                                            <option>{{username}}</option>
+                                        {{/if}}
+                                    {{/each}}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-4 control-label" style="padding-top: 7px">业主联系人电话 :</label>
+                            <div class="col-sm-8">
+                                <input type="tel" class="form-control m-b owner" value="{{owner}}">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-lg-4 control-label" style="padding-top: 7px">工程进度 :</label>
+                            <div class="col-lg-8 m-b">
+                                <p class="form-control-static">{{progress}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-4 control-label" style="padding-top: 7px">备份方案 :</label>
+                            <div class="col-sm-8">
+                                <select class="form-control m-b backup" name="backup">
+                                    {{#each backUp}}
+                                        {{#if backUpSelect value}}
+                                            <option selected="selected">{{name}}</option>
+                                        {{else}}
+                                            <option>{{name}}</option>
+                                        {{/if}}
+                                    {{/each}}
+                                </select>
+                            </div>
+                        </div>
+                    {{/each}}
+                    <div class="row serverRes" style="display: none;margin: auto;color: red;text-align: center;margin-bottom: 10px;"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success editorpro">确定</button>
+                    <button type="button" class="btn" data-dismiss="modal" style="background-color: #b3b3b3;color:#fff">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--添加项目模态框-->
+    <div class="modal inmodal" id="myModalAddPro" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <div class="modal-title">新增项目</div>
+                </div>
+                <div class="modal-body modal-body-pad">
+                        <div class="row">
+                            <label class="col-sm-4 control-label" style="padding-top: 7px"><p class="notnull">*</p>项目名称 :</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control m-b proName">
+                                <span class="help-block m-b-none proNameNone" style="color:red;top:2px;right: -40px;">不能为空</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-4 control-label" style="padding-top: 7px"><p class="notnull">*</p>开始日期 :</label>
+                            <div class="col-sm-8">
+                                <!--<input type="text" class="form-control m-b beginDate" value="{{begindate}}">-->
+                                <div class="form-group">
+                                    <div class="input-group date" id="data_1">
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control beginDate" />
+                                    </div>
+                                    <span class="help-block m-b-none beginDateNone" style="top:4px;right: -40px;">不能为空</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-4 control-label" style="padding-top: 7px"><p class="notnull">*</p>到期时间 :</label>
+                            <div class="col-sm-8">
+                                <!--<input type="text" class="form-control m-b beginDate" value="{{begindate}}">-->
+                                <div class="form-group">
+                                    <div class="input-group date" id="data_3">
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control endDate" />
+                                    </div>
+                                    <span class="help-block m-b-none endDateNone" style="top:4px;right: -40px;">不能为空</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-4 control-label" style="padding-top: 7px">总监理工程师 :</label>
+                            <div class="col-sm-8">
+                                <select class="form-control m-b enger" name="enger">
+                                    <option>请选择</option>
+                                    {{#each userTableZG}}
+                                        <option>{{username}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                        </div>
+                        <!--<div class="form-group" style="height: 30px;">-->
+                            <!--<label class="col-sm-4 control-label" style="padding-top: 7px">联系电话 :</label>-->
+                            <!--<div class="col-sm-8">-->
+                                <!--<input type="text" class="form-control m-b tel">-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <div class="row">
+                            <label class="col-sm-4 control-label" style="padding-top: 7px">业主联系人电话 :</label>
+                            <div class="col-sm-8">
+                                <!--<select class="form-control m-b owner" name="owner">-->
+                                    <!--{{#each userTableYZ}}-->
+                                        <!--<option>{{userName}}</option>-->
+                                    <!--{{/each}}-->
+                                <!--</select>-->
+                                <input type="text" class="form-control m-b owner">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-4 control-label" style="padding-top: 7px">备份方案 :</label>
+                            <div class="col-sm-8">
+                                <select class="form-control m-b backup" name="backup">
+                                    {{#each backUp}}
+                                        <option>{{name}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                        </div>
+                    <div class="row serverRes" style="display: none;margin: auto;color: red;text-align: center;margin-bottom: 10px;"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success addpro">确定</button>
+                    <button type="button" class="btn" data-dismiss="modal" style="background-color: #b3b3b3;color:#fff">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--添加类型模态框-->
+    <div class="modal inmodal" id="myModalAddType" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <div class="modal-title">添加类型</div>
+                </div>
+                <div class="modal-body modal-body-pad">
+                    <div class="form-group" style="height: 30px;">
+                        <label class="col-sm-4 control-label" style="padding-top: 7px"><p class="notnull">*</p>类型 :</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control m-b newProType">
+                            <span class="help-block m-b-none newProTypeNone" style="top:4px;right: -40px;">不能为空</span>
+                            <!--<select class="form-control m-b type" name="type">-->
+                                <!--<option>电子警察</option>-->
+                                <!--<option>卡口</option>-->
+                                <!--<option>监控</option>-->
+                                <!--<option>机房</option>-->
+                            <!--</select>-->
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success addProType">确定</button>
+                    <button type="button" class="btn" data-dismiss="modal" style="background-color: #b3b3b3;color:#fff">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--删除类型模态框-->
+    <div class="modal inmodal" id="myModalDelProType" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <div class="modal-title">删除确定框</div>
+                </div>
+                <div class="modal-body">
+                    <p>你确定删除当前选中的项目类型吗？</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success delprotype" data-dismiss="modal">确定</button>
+                    <button type="button" class="btn" data-dismiss="modal" style="background-color: #b3b3b3;color:#fff">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--恢复模态框-->
+    <div class="modal inmodal" id="myModalHF" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <div class="modal-title">恢复确认框</div>
+                </div>
+                <div class="modal-body">
+                    {{#each oneBackup}}
+                        <p style="text-align: center;font-size: 14px;">你确定将项目数据恢复到</p>
+                        <p style="text-align: center;font-size: 14px;">{{createTime}}的数据吗？</p>
+                    {{/each}}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success toHF" data-dismiss="modal">确定</button>
+                    <button type="button" class="btn" data-dismiss="modal" style="background-color: #b3b3b3;color:#fff">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--项目备注保存成功模态框-->
+    <div class="modal inmodal" id="myModalBZCG" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <div class="modal-title">成功</div>
+                </div>
+                <div class="modal-body">
+                    <p>项目备注保存成功！</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</template>

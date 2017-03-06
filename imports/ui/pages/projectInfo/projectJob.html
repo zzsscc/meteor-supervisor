@@ -1,0 +1,170 @@
+<template name="projectJob">
+    {{> subNavigation}}
+    <div class="row  border-bottom white-bg dashboard-header">
+    	
+    	<!--点位类型-->
+        <div class="clear-fix" style="margin-bottom: 20px">
+            <div class="pull-left" style="height: 30px;line-height: 30px;margin-right:35px;font-size:14px;">点位类型 ：</div>
+            <ul class="inspector-ul">
+            	<ul class="inspector-ul">
+		            <li class="potype active" data="all">全部</li>
+                    {{#if Template.subscriptionsReady}}
+		            {{#each proType}}
+		            <li class="potype" data={{_id}}>{{type}}</li>
+		              {{/each}}
+                    {{/if}}
+		        </ul>
+            </ul>
+        </div>
+        <!--监理员-->
+        <div class="clear-fix" style="margin-bottom: 20px">
+            <div class="pull-left" style="height: 30px;line-height: 30px;margin-right:48px;font-size:14px;">监理员 ：</div>
+            <ul class="inspector-ul">
+            	<!--<li class="supervision active" data="all">全部</li>-->
+                <!--{{#if Template.subscriptionsReady}}-->
+	            {{#each superVision}}
+	            <li class="supervision" data={{superVision_id}}>{{visionName}}</li>
+	            {{/each}}
+                <!--{{/if}}-->
+	        </ul>
+        </div>
+        <!--时间-->
+        <div class="clear-fix" style="margin-bottom: 10px">
+            <div class="pull-left" style="height: 30px;line-height: 30px;margin-right:61px;font-size:14px;">时间 ：</div>
+            <div class="form-group pull-left" style="width: 220px;">
+                <div class="input-group date" id="data_1">
+                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input value="{{today}}" type="text" class="form-control chooseDay" readonly>
+                </div>
+            </div>
+        </div>
+        <!--轨迹类型，拍摄或者签到-->
+        <div class="clear-fix" style="margin-bottom: 20px">
+            <div class="pull-left" style="height: 30px;line-height: 30px;margin-right:35px;font-size:14px;">轨迹类型 ：</div>
+            <ul class="inspector-ul">
+                <ul class="inspector-ul">
+                    <li class="trail active paishe" data="paishe">拍摄轨迹</li>
+                    <li class="trail qiandao" data="qiandao">签到轨迹</li>
+                </ul>
+            </ul>
+        </div>
+
+        
+        
+        <!--选择时间-->
+        <div class="clear-fix">
+             <!--<div class="pull-left" style="height: 30px;line-height: 30px;margin-right:35px;font-size:14px;">选择时间：</div>-->
+            <!--&lt;!&ndash;进度条&ndash;&gt;-->
+            <!--<div class="col-lg-6">-->
+            	<!--&lt;!&ndash;noUI-slider放弃&ndash;&gt;-->
+                <!--&lt;!&ndash;<div id="range_slider"></div>&ndash;&gt;-->
+                <!--&lt;!&ndash;jqUI放弃&ndash;&gt;-->
+                <!--<p>-->
+				  <!--<input type="text" id="amount" style="border:0; color:#f6931f; font-weight:bold;">-->
+				<!--</p>-->
+		 <!---->
+				<!--<div id="slider-range"></div>-->
+                <!---->
+                 <!--&lt;!&ndash;<div class="form-group" id="data_5">-->
+                    <!--<label class="font-noraml">Range select</label>-->
+                    <!--<div class="input-daterange input-group" id="datepicker">-->
+                        <!--<input type="text" class="input-sm form-control" name="start" value="05/14/2014"/>-->
+                        <!--<span class="input-group-addon">to</span>-->
+                        <!--<input type="text" class="input-sm form-control" name="end" value="05/22/2014" />-->
+                    <!--</div>-->
+                <!--</div>&ndash;&gt;-->
+            <!--</div>-->
+            <div class="row">
+                <div class="f-flt" style="line-height: 40px;margin-left: 30px">
+                    <span class="markinfo">位置名称：请选择地图上的一个点位</span>
+                    {{#if trail_type}}
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span>照片数量：{{point_nowpicsum}} 张</span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span>最新上传图片：{{piccount}}张</span>
+                    {{/if}}
+                </div>
+                <div class="col-sm-3 f-frt">
+                    <div class="input-group"><input type="text" placeholder="请输入点位编号或设备名称" class="searchPoint input-sm form-control"> <span class="input-group-btn toSearchPoint">
+                                        <button type="button" class="btn btn-sm btn-success"> <i class="fa fa-search"></i></button> </span></div>
+                </div>
+            </div>
+            
+        </div>
+
+        <!--<div class="row" style="margin-left:12px;margin-bottom: 8px;font-size: 14px">-->
+            <!--<span class="markinfo">位置名称：请选择地图上的一个点位</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>照片数量：{{point_nowpicsum}} 张</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>最新上传图片：{{piccount}}张</span>-->
+        <!--</div>-->
+        
+        <!--地图-->
+        <div class="col-xs-12" style="height: 600px;position: relative;">
+			<div id="allmap" style="width:100%;height:100%;"></div>
+            {{#if Template.subscriptionsReady}}
+            <div class="trail-list">
+                {{#if trail_type}}
+                    <div class="trail-title">拍摄轨迹列表</div>
+                {{else}}
+                    <div class="trail-title">签到轨迹列表</div>
+                {{/if}}
+                <div class="trail-ul">
+                    {{#each trajectory}}
+                        <div class="trail-li" data-pointid={{id}} data-content={{content}}>
+                            <p class="trail-p1">{{ordinal}}.{{content}}</p>
+                            <p class="trail-p2">{{time}}</p>
+                        </div>
+                    {{/each}}
+                </div>
+            </div>
+            {{/if}}
+			<div class="pull-right maplocation"></div>  
+        </div>
+    </div>
+      <!--照片-->
+      	<!--<div class="ibox-title">-->
+	        <!--<h3 style="font-weight:normal">最新上传图片：{{piccount}}张</h3>-->
+	    <!--</div>-->
+    {{#if trail_type}}
+        <div class="projectPics clear-fix white-bg" style="margin-top:20px;">
+            {{#if Template.subscriptionsReady}}
+            {{#each imageinfo}}
+                <div>
+                    <div id="links" class="pics pull-left" style="position: relative">
+                        <!--<img class="jl-img" src="{{base64}}" alt="{{imgRemark}}">-->
+                        <a href="{{base64}}" title="{{createtime}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{imgRemark}}" data-gallery="" data-description="This is a banana."><img class="jl-img" src="{{base64}}"></a>
+                        <button class="btn btn-default btn-circle toremovePic" type="button" data-toggle="modal" data-target="#myModalRemovePic"><i class="fa fa-minus"></i></button>
+                        <div style="position: absolute;bottom: -48px;text-align: center">{{createtime}}</div>
+                    </div>
+                </div>
+            {{/each}}
+            {{/if}}
+        </div>
+    {{/if}}
+        
+        
+    <div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls">
+        <div class="slides"></div>
+        <h3 class="title"></h3>
+        <a class="prev">‹</a>
+        <a class="next">›</a>
+        <a class="close">×</a>
+        <a class="play-pause"></a>
+        <ol class="indicator"></ol>
+    </div>
+    <!--删除照片模态框-->
+    <div class="modal inmodal fade" id="myModalRemovePic" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <div class="modal-title">删除确认框</div>
+                </div>
+                <div class="modal-body">
+                    <p>你确定删除当前选中的照片吗？</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success removePic" data-dismiss="modal">确认</button>
+                    <button type="button" class="btn" data-dismiss="modal" style="background-color: #b3b3b3;color:#fff">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

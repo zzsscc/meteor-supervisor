@@ -1,0 +1,46 @@
+<template name="login">
+    <div class="fakebody">
+        <div class="text-center pra">天信监理项目监管系统软件</div>
+        <div class="large-box box login-box pull-center">
+            <div class="large-box biaodan">
+                <form class="form-inline login-form-inline form" role="form">
+                    <div class="form-group login-form-group">
+                        <div class="input-group login-input-group">
+                            <div class="input-group-addon login-input-group-addon"><i class="glyphicon glyphicon-user" style="color:#11a3ee;"></i></div>
+                            <input class="form-control login-form-control text-left account" placeholder="账户" required="">
+                        </div>
+                    </div>
+                    <div class="form-group login-form-group">
+                        <div class="input-group login-input-group">
+                            <div class="input-group-addon login-input-group-addon"><i class="glyphicon glyphicon-lock" style="color:#11a3ee;"></i></div>
+                            <input class="form-control login-form-control password" type="password" placeholder="密码" required="">
+                        </div>
+                    </div>
+                    <div class="form-group login-form-group">
+                        <div class="input-group login-input-group">
+                            <input class="form-control login-form-control text-center input-group-addon login-input-group-addon"  id="vercode" type="text" placeholder="验证码" style="width:142px;margin-right:24px;border-left:1px solid #e5e5e5;border-right:1px solid #e5e5e5;">
+                            <input class="form-control login-form-control text-center unchanged" type="text" readonly="readonly" id="checkCode" style="width:98px">
+                        </div>
+                    </div>
+                    <div class="form-group login-form-group" style="margin-top: 25px;">
+
+                        <input type="checkbox" class="left i-checks f-flt" style="margin:0 10px 0 0;height: 16px;width: 16px;float:left;"><span style="float:left;">记住用户名和密码</span>
+
+                    </div>
+                    <button type="button" class="submit btn btn-success block full-width m-b login">登录</button>
+                </form>
+
+            </div>
+            <div class="line"></div>
+            <div class="large-box logo" >
+                <img src="img/login/logo.png" style="margin-left:60px;" alt='logo'/>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer fixed_full">
+        <div style="text-align: center;color:#fff;">
+            <strong>Copyright &copy; 2016</strong> 杭州以数科技有限公司
+        </div>
+    </div>
+</template>

@@ -1,0 +1,44 @@
+<template name="picMain">
+    <div class="row border-bottom white-bg dashboard-header">
+        <!--点位信息导入-->
+        <div class="clear-fix" style="padding-bottom: 10px;border-bottom: 1px solid #e6e6e6;">
+            <div class="pull-left" style="height: 30px;line-height: 30px;margin-right:35px;font-size:14px;">点位信息导入 ：</div>
+            <div class="btn-group">
+                <button class="btn btn-success" type="button">电子警察</button>
+                <button class="btn btn-white" type="button">卡口</button>
+                <button class="btn btn-white" type="button">动态监控</button>
+                <button class="btn btn-white" type="button">机房</button>
+            </div>
+            <ul class="inspector-ul">
+                {{#each proType}}
+                    <li>{{type}}</li>
+                {{/each}}
+            </ul>
+        </div>
+        <div style="padding-top:15px;">
+            <div class="p-t-title clear-fix">
+                <h3 class="pull-left">点位信息</h3>
+                <div class="pull-right">
+                    <input type="text" placeholder="请输入相关信息">
+                    <button class="btn btn-success">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+            </div>
+            <table class="col-xs-12">
+                <tr>
+                    <th>序号</th>
+                    <th>路口名称</th>
+                    <th>纬度</th>
+                    <th>经度</th>
+                    <th>所属区域</th>
+                    <th>所需图片张数</th>
+                    <th>备注</th>
+                </tr>
+                {{#each pointTableFull}}
+                    {{> picTable}}
+                {{/each}}
+            </table>
+        </div>
+    </div>
+</template>

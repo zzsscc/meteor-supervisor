@@ -1,0 +1,23 @@
+<!--项目管理-项目管理表格-->
+<template name="project_table">
+    <tr class="choosePro">
+        <td>{{ordinal}}</td>
+        <td>{{proname}}</td>
+        <td>{{begindate}}</td>
+        <td>{{enddate}}</td>
+        <td>{{chiefEngineer}}</td>
+        <td>{{owner}}</td>
+        <td>{{progress}}</td>
+        <td>{{backup}}</td>
+        <td>
+            <button class="btn btn-success editor" type="button" data-toggle="modal" data-target="#myModalEditorPro">编辑</button>
+            {{#if accState state}}
+                <button class="btn btn-success acc">已验收</button>
+            {{else}}
+                <button class="btn btn-gray acc">未验收</button>
+            {{/if}}
+            <button class="btn btn-success del" type="button" data-toggle="modal" data-target="#myModalDelPro">删除</button>
+            <button class="btn btn-success jumpPro" type="button">详情</button>
+        </td>
+    </tr>
+</template>

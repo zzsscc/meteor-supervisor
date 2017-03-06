@@ -1,0 +1,210 @@
+<template name="cockpit">
+      <div class="row border-bottom" id="navbarPositon">
+        <div class="navbar-position"><span>当前位置 :</span><span style="color:#11a3ee"> 驾驶舱</span></div>
+    </div>
+    <!-- Page heading -->
+    <!--{{> pageHeading title='Static tables' category='Tables' }}-->
+
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>项目管理</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-sm-3 f-frt tosearchinput">
+                                <div class="input-group"><input type="text" placeholder="请输入项目名称" class="searchPro input-sm form-control"> <span class="input-group-btn toSearchPro">
+                                        <button type="button" class="btn btn-sm btn-success"> <i class="fa fa-search"></i></button> </span></div>
+                            </div>
+                        </div>
+                        <table class="table table-hover">
+                            <thead class="table-thead-font" style="font-weight: 400">
+                                <tr>
+                                    <th>序号</th>
+                                    <th>项目名称</th>
+                                    <th>开始日期</th>
+                                    <th>到期时间</th>
+                                    <th>监理工程师</th>
+                                    <th>联系电话</th>
+                                    <th>工程进度</th>
+                                    <th>备份方案</th>
+                                    <th>周报</th>
+                                    <th>月报</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-tbody-font">
+                                {{#if Template.subscriptionsReady}}
+                                {{#each cockpitTable}}
+                                    <tr class="choosePro">
+                                        <td>{{ordinal}}</td>
+                                        <td>{{proname}}</td>
+                                        <td>{{begindate}}</td>
+                                        <td>{{enddate}}</td>
+                                        <td>{{supervisionEngineer}}</td>
+                                        <td>{{supEngTel}}</td>
+                                        <td>{{progress}}</td>
+                                        <td>{{backup}}</td>
+                                        <td>{{weekly}}</td>
+                                        <td>{{monthly}}</td>
+                                        {{#if isHandle}}
+                                            <td class="col-lg-3 col-md-4">
+                                                <button class="btn btn-success editor" type="button" data-toggle="modal" data-target="#myModalEditorPro">编辑</button>
+                                                {{#if accState state}}
+                                                    <button class="btn btn-success acc">已验收</button>
+                                                {{else}}
+                                                    <button class="btn btn-gray acc">未验收</button>
+                                                {{/if}}
+                                                <button class="btn btn-success jumpPro" type="button">详情</button>
+                                            </td>
+                                        {{else}}
+                                            <td>
+                                                <button class="btn btn-success jumpPro" type="button">详情</button>
+                                            </td>
+                                        {{/if}}
+
+
+                                        <!--<td>-->
+                                        <!--<button class="btn btn-success editor" type="button" data-toggle="modal" data-target="#myModalEditorPro">编辑</button>-->
+                                            <!--{{#if accState state}}-->
+                                        <!--<button class="btn btn-success acc">已验收</button>-->
+                                            <!--{{else}}-->
+                                        <!--<button class="btn btn-gray acc">未验收</button>-->
+                                            <!--{{/if}}-->
+                                        <!--</td>-->
+                                    </tr>
+                                {{/each}}
+                                {{/if}}
+                            </tbody>
+                        </table>
+                        <div class="M-box1" style="float: right"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--模态框-->
+    <!--编辑模态框-->
+    <div class="modal inmodal" id="myModalEditorPro" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <div class="modal-title">项目编辑</div>
+                </div>
+                <div class="modal-body modal-body-pad">
+                            {{#each editorTable}}
+                                <div class="row">
+                                    <label class="col-sm-4 control-label" style="padding-top: 7px"><p class="notnull">*</p>项目名称 :</label>
+                                    <div class="col-sm-8" style="position: relative;">
+                                        <input type="text" class="form-control m-b proName" value="{{proname}}">
+                                        <span class="help-block m-b-none proNameNone" style="color:red;top:2px;right: -40px;">不能为空</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-sm-4 control-label" style="padding-top: 7px"><p class="notnull">*</p>开始日期 :</label>
+                                    <div class="col-sm-8">
+                                        <!--<input type="text" class="form-control m-b beginDate" value="{{begindate}}">-->
+                                        <div class="form-group">
+                                            <div class="input-group date" id="data_1">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control beginDate" value="{{begindate}}"/>
+                                            </div>
+                                            <span class="help-block m-b-none beginDateNone" style="top:4px;right: -40px;">不能为空</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-sm-4 control-label" style="padding-top: 7px"><p class="notnull">*</p>到期时间 :</label>
+                                    <div class="col-sm-8">
+                                        <!--<input type="text" class="form-control m-b beginDate" value="{{begindate}}">-->
+                                        <div class="form-group">
+                                            <div class="input-group date" id="data_2">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control endDate" value="{{enddate}}"/>
+                                            </div>
+                                            <span class="help-block m-b-none endDateNone" style="top:4px;right: -40px;">不能为空</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-sm-4 control-label" style="padding-top: 7px">监理工程师 :</label>
+                                    <div class="col-sm-8">
+                                        <select class="form-control m-b enger" name="enger">
+                                            <option>请选择</option>
+                                            {{#each userTableJLG}}
+                                                {{#if engSelect username}}
+                                                    <option selected="selected">{{username}}</option>
+                                                {{else}}
+                                                    <option>{{username}}</option>
+                                                {{/if}}
+                                            {{/each}}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-sm-4 control-label" style="padding-top: 7px">联系电话 :</label>
+                                    <div class="col-sm-8 m-b">
+                                        <!--<input type="text" class="form-control m-b tel" value="{{supEngTel}}">-->
+                                        <p class="form-control-static tel">{{supEngTel}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-lg-4 control-label" style="padding-top: 7px">工程进度 :</label>
+                                    <div class="col-lg-8 m-b">
+                                        <p class="form-control-static">{{progress}}</p>
+                                    </div>
+                                </div>
+                                <div class="row" style="vertical-align: middle">
+                                    <label class="col-sm-4 control-label" style="padding-top: 7px">备份方案 :</label>
+                                    <div class="col-sm-8">
+                                        <select class="form-control m-b backup" name="backup">
+                                            {{#each backUp}}
+                                                {{#if backUpSelect value}}
+                                                    <option selected="selected">{{name}}</option>
+                                                {{else}}
+                                                    <option>{{name}}</option>
+                                                {{/if}}
+                                            {{/each}}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col-lg-4 control-label" style="padding-top: 7px">项目报告 :</label>
+                                    <div class="col-lg-8 m-b">
+                                        <ul>
+                                            <li class="clear-fix pro-e-li pull-left" style="width: 40%;margin-right: 5%">
+                                                <div class="i-checks" style="margin:auto;padding-left: 0;padding-top: 7px">
+                                                    <label style="margin-bottom: 15px">
+                                                        <input style="margin-top: -3px" class="checkboxWeekly icheckbox_square-green" type="checkbox" checked="{{isweekly _id}}" />
+                                                        <span style="font-size: 14px">周报</span>
+                                                    </label>
+                                                </div>
+                                            </li>
+                                            <li class="clear-fix pro-e-li pull-left" style="width: 40%;margin-right: 5%">
+                                                <div class="i-checks" style="margin:auto;padding-left: 0;padding-top: 7px">
+                                                    <label style="margin-bottom: 15px">
+                                                        <input style="margin-top: -3px" class="checkboxMonthly icheckbox_square-green" type="checkbox" checked="{{ismonthly _id}}" />
+                                                        <span style="font-size: 14px">月报</span>
+                                                    </label>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            {{/each}}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success editorpro">确定</button>
+                    <button type="button" class="btn" data-dismiss="modal" style="background-color: #b3b3b3;color:#fff">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<!--<template name="Project">-->
+    <!--{{> pages}}-->
+    <!--{{> pagesNav}}  &lt;!&ndash;Bottom navigation&ndash;&gt;-->
+<!--</template>-->
