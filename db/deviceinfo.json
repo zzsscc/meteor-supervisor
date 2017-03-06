@@ -1,0 +1,24 @@
+{
+	"_id" : ObjectId("5847e4152d6d9be3bfc0967a"),
+	"device_id" : NumberInt("1"),
+	"direction" : NumberInt("1"),
+	"id" : NumberInt("1"),
+	"name" : "电子警察1路口1朝东",
+	"point_id" : NumberInt("1")
+},
+{
+	"_id" : ObjectId("5847e4762d6d9be3bfc0967b"),
+	"device_id" : NumberInt("1"),
+	"direction" : NumberInt("2"),
+	"id" : NumberInt("2"),
+	"name" : "电子警察2路口1朝南",
+	"point_id" : NumberInt("1")
+},
+{
+	"_id" : ObjectId("5847e49e2d6d9be3bfc0967c"),
+	"device_id" : NumberInt("2"),
+	"direction" : NumberInt("1"),
+	"id" : NumberInt("3"),
+	"name" : "卡口路口2朝东",
+	"point_id" : NumberInt("2")
+},

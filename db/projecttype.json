@@ -1,0 +1,42 @@
+{
+	"_id" : "LwRDe7dMPTLddo8QD",
+	"belongPro" : "qhkNTCW7cmGwhTp6M",
+	"supervision" : [
+		"ZgWB8hD5vpQgrEydF"
+	],
+	"type" : "测试测试"
+},
+{
+	"_id" : "bLsNxjHpRypArpMef",
+	"belongPro" : "G4YWyDhPuDLRrmQdA",
+	"supervision" : [
+		"ZgWB8hD5vpQgrEydF",
+		"bJweTJtB5rwwdbegt",
+		"8XEvithjM9dwz95j9"
+	],
+	"type" : "电子警察"
+},
+{
+	"_id" : "Swa3wWD4aLpi9tdXt",
+	"belongPro" : "G4YWyDhPuDLRrmQdA",
+	"supervision" : [
+		"bJweTJtB5rwwdbegt",
+		"ZgWB8hD5vpQgrEydF"
+	],
+	"type" : "卡口"
+},
+{
+	"_id" : "NGr59SDy2E8nq7xst",
+	"belongPro" : "G4YWyDhPuDLRrmQdA",
+	"supervision" : [
+		"ZgWB8hD5vpQgrEydF",
+		"8XEvithjM9dwz95j9"
+	],
+	"type" : "监控"
+},
+{
+	"_id" : "gnTLe4beharWLcwYA",
+	"belongPro" : "G4YWyDhPuDLRrmQdA",
+	"supervision" : [ ],
+	"type" : "机房"
+},

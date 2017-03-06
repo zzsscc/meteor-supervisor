@@ -1,0 +1,54 @@
+{
+	"_id" : "PwjbyQ2nHYLmZDgtw",
+	"belongPoint" : "48vrDYXkias3vtWjr",
+	"name" : "东—西",
+	"piccount" : NumberInt("5")
+},
+{
+	"_id" : "f2wi2hoZJiJdTYnEZ",
+	"belongPoint" : "48vrDYXkias3vtWjr",
+	"name" : "南",
+	"piccount" : NumberInt("6")
+},
+{
+	"_id" : "XoDutvCwen9vxuXxS",
+	"belongPoint" : "ZY23tFfAo6T6bndoC",
+	"name" : "北",
+	"piccount" : NumberInt("5")
+},
+{
+	"_id" : "LaijCw5FWLR4DKJ8D",
+	"belongPoint" : "ZY23tFfAo6T6bndoC",
+	"name" : "东-西",
+	"piccount" : NumberInt("7")
+},
+{
+	"_id" : "Mtcz5kPpkoxFacLZu",
+	"belongPoint" : "ZY23tFfAo6T6bndoC",
+	"name" : "东-西-东",
+	"piccount" : NumberInt("8")
+},
+{
+	"_id" : "5owf7mX3MPMvsn8QG",
+	"belongPoint" : "7mFRtLBgaduYcZFkk",
+	"name" : "东",
+	"piccount" : NumberInt("40")
+},
+{
+	"_id" : "9jJdidbjo2RzkT5NS",
+	"belongPoint" : "eDKyrKFfszRxgH7QX",
+	"name" : "北",
+	"piccount" : NumberInt("15")
+},
+{
+	"_id" : "S4WhadrnTACmcPTp4",
+	"belongPoint" : "FoKZXkfzcj6A87Q4d",
+	"name" : "北",
+	"piccount" : NumberInt("2")
+},
+{
+	"_id" : "DTB5yhbmNhcaazt8F",
+	"belongPoint" : "t7HkhsPm5SEdRA8XG",
+	"name" : null,
+	"piccount" : NumberInt("0")
+},

@@ -1,0 +1,43 @@
+{
+	"_id" : "ASXPHyZnZHwP9SZpG",
+	"createAt" : "1487302459",
+	"distance" : "500",
+	"lat" : "30.271985",
+	"lng" : "120.148409",
+	"pointCode" : "P-3452",
+	"pointName" : "电子警察点位1",
+	"typeid" : "bLsNxjHpRypArpMef",
+	"typeName" : "电子警察",
+	"userid" : "ZgWB8hD5vpQgrEydF",
+	"userName" : "监理员1"
+},
+{
+	"_id" : "gzbEkdMafPezz6sxZ",
+	"createAt" : "1487302253",
+	"lat" : "30",
+	"lng" : "120",
+	"pointCode" : null,
+	"pointName" : "湖州街啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊",
+	"userid" : "ZgWB8hD5vpQgrEydF",
+	"userName" : "监理员1"
+},
+{
+	"_id" : "vy8QPEBkQgMKb5nxz",
+	"createAt" : "1487733541",
+	"lat" : 30.275415837575,
+	"lng" : 120.14362101867,
+	"pointCode" : null,
+	"pointName" : "浙江省杭州市西湖区黄龙路8号",
+	"userid" : "ESEwc7PwKadP4p3De",
+	"userName" : "admin"
+},
+{
+	"_id" : "RxkhmPDYeXa2YFTTd",
+	"createAt" : "1487919726",
+	"lat" : 30.27370397277,
+	"lng" : 120.14621043727,
+	"pointCode" : null,
+	"pointName" : "浙江省杭州市西湖区新淳路646号",
+	"userid" : "ESEwc7PwKadP4p3De",
+	"userName" : "admin"
+},

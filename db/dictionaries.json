@@ -1,0 +1,54 @@
+{
+	"_id" : ObjectId("584e2f9b6b65de07f011d871"),
+	"ecode" : "userType",
+	"name" : "admin",
+	"value" : 0
+},
+{
+	"_id" : ObjectId("584e301e6b65de07f011d876"),
+	"ecode" : "userType",
+	"name" : "总监理工程师",
+	"value" : 1
+},
+{
+	"_id" : ObjectId("584e302f6b65de07f011d878"),
+	"ecode" : "userType",
+	"name" : "监理工程师",
+	"value" : 2
+},
+{
+	"_id" : ObjectId("584e30406b65de07f011d87b"),
+	"ecode" : "userType",
+	"name" : "监理员",
+	"value" : 3
+},
+{
+	"_id" : ObjectId("584e30506b65de07f011d87d"),
+	"ecode" : "userType",
+	"name" : "业主",
+	"value" : 4
+},
+{
+	"_id" : ObjectId("5864a75544e5230dd4a75f64"),
+	"ecode" : "backUp",
+	"name" : "请选择",
+	"value" : 0
+},
+{
+	"_id" : ObjectId("5864a76d44e5230dd4a75f66"),
+	"ecode" : "backUp",
+	"name" : "每天",
+	"value" : 1
+},
+{
+	"_id" : ObjectId("5864a78b44e5230dd4a75f6b"),
+	"ecode" : "backUp",
+	"name" : "每周",
+	"value" : 3
+},
+{
+	"_id" : ObjectId("5864a79744e5230dd4a75f6d"),
+	"ecode" : "backUp",
+	"name" : "每月",
+	"value" : 4
+},
